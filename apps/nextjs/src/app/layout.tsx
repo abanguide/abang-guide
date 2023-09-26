@@ -5,6 +5,7 @@ import "~/styles/globals.css";
 
 import { headers } from "next/headers";
 
+import { BottomNavigation } from "./_components/BottomNavigation";
 import { TRPCReactProvider } from "./providers";
 
 const fontSans = Inter({
@@ -21,11 +22,6 @@ export const metadata: Metadata = {
     url: "https://create-t3-turbo.vercel.app",
     siteName: "Create T3 Turbo",
   },
-  twitter: {
-    card: "summary_large_image",
-    site: "@jullerino",
-    creator: "@jullerino",
-  },
 };
 
 export default function Layout(props: { children: React.ReactNode }) {
@@ -33,7 +29,10 @@ export default function Layout(props: { children: React.ReactNode }) {
     <html lang="en">
       <body className={["font-sans", fontSans.variable].join(" ")}>
         <TRPCReactProvider headers={headers()}>
-          {props.children}
+          <main className="flex min-h-screen flex-col items-center justify-between">
+            {props.children}
+            <BottomNavigation />
+          </main>
         </TRPCReactProvider>
       </body>
     </html>
