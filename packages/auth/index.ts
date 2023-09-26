@@ -27,12 +27,7 @@ export const {
   CSRF_experimental,
 } = NextAuth({
   adapter: DrizzleAdapter(db, tableCreator),
-  providers: [
-    Discord({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
-    }),
-  ],
+  providers: [],
   callbacks: {
     session: ({ session, user }) => ({
       ...session,
