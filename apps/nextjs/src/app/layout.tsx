@@ -36,7 +36,7 @@ export default function Layout(props: { children: React.ReactNode }) {
       <body className={["font-sans", fontSans.variable].join(" ")}>
         <Script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=78db97fad296256c4498faa49d235692&libraries=services,clusterer&autoload=false" />
         <TRPCReactProvider headers={headers()}>
-          <main className="flex min-h-screen flex-col items-center justify-between">
+          <main className="flex min-h-screen flex-col items-center">
             {props.children}
             <BottomNavigation />
           </main>
