@@ -19,8 +19,8 @@
   },
   "devDependencies": {
     "@acme/eslint-config": "^0.2.0",
-    "@acme/prettier-config": "^0.1.0",
-    "@acme/tsconfig": "^0.1.0",
+    "@ajou-tayo/prettier-config": "^0.1.0",
+    "@ajou-tayo/tsconfig": "^0.1.0",
     "dotenv-cli": "^7.3.0",
     "drizzle-kit": "^0.19.13",
     "eslint": "^8.50.0",
@@ -33,5 +33,5 @@
       "@acme/eslint-config/base"
     ]
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@ajou-tayo/prettier-config"
 }

@@ -20,28 +20,35 @@
     "@tanstack/react-query": "^4.35.3",
     "@tanstack/react-query-devtools": "^4.35.3",
     "@tanstack/react-query-next-experimental": "5.0.0-alpha.80",
+    "@nextui-org/react": "^2.1.13",
     "@trpc/client": "^10.38.4",
     "@trpc/next": "^10.38.4",
     "@trpc/react-query": "^10.38.4",
     "@trpc/server": "^10.38.4",
+    "framer-motion": "^10.16.4",
+    "lucide-react": "^0.279.0",
     "next": "^13.5.3",
+    "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-kakao-maps-sdk": "^1.1.21",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "superjson": "1.13.1",
     "zod": "^3.22.2"
   },
   "devDependencies": {
     "@acme/eslint-config": "^0.2.0",
-    "@acme/prettier-config": "^0.1.0",
+    "@ajou-tayo/prettier-config": "^0.1.0",
     "@acme/tailwind-config": "^0.1.0",
-    "@acme/tsconfig": "^0.1.0",
+    "@ajou-tayo/tsconfig": "^0.1.0",
+    "@tailwindcss/typography": "^0.5.10",
     "@types/node": "^18.17.19",
     "@types/react": "^18.2.22",
     "@types/react-dom": "^18.2.7",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.50.0",
     "prettier": "^3.0.3",
-    "tailwindcss": "3.3.2",
+    "tailwindcss": "^3.3.2",
     "typescript": "^5.2.2"
   },
   "eslintConfig": {
@@ -52,5 +59,5 @@
       "@acme/eslint-config/react"
     ]
   },
-  "prettier": "@acme/prettier-config"
+  "prettier": "@ajou-tayo/prettier-config"
 }
