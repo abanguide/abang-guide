@@ -7,7 +7,7 @@ export default function MapLayout({ children }: React.PropsWithChildren) {
     <div className="absolute h-screen w-screen">
       <Map
         id="map"
-        center={{ lat: 33.5563, lng: 126.79581 }}
+        center={{ lat: 37.28022225696853, lng: 127.043874901048 }}
         style={{ width: "100%", height: "100%" }}
       >
         {children}
