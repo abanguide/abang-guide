@@ -27,7 +27,10 @@ export default function Home() {
     <>
       <Navbar>
         <NavbarBrand>
-          <p className="font-bold text-inherit">AJOU LIFE</p>
+          <div className="flex flex-col justify-center">
+            <p className="text-lg font-bold leading-none">AJOU LIFE</p>
+            <p className="text-xs leading-none">장우성아직여친구함</p>
+          </div>
         </NavbarBrand>
         <NavbarContent justify="end">
           <NavbarItem>

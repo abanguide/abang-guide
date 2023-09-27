@@ -26,7 +26,10 @@ export default function MyInfoPage() {
     <>
       <Navbar>
         <NavbarBrand>
-          <p className="font-bold text-inherit">AJOU LIFE</p>
+          <div className="flex flex-col justify-center">
+            <p className="text-lg font-bold leading-none">AJOU LIFE</p>
+            <p className="text-xs leading-none">장우성아직여친구함</p>
+          </div>
         </NavbarBrand>
       </Navbar>
       <div className="flex w-full flex-col gap-4 px-4">
@@ -52,14 +55,28 @@ export default function MyInfoPage() {
           isPressable
           onPress={onOpen}
         >
-          <CardBody>⭐ 장우성의 여자친구 지원하기 ⭐</CardBody>
-          <Divider />
-          <CardFooter>
-            <p className="text-content3-foreground text-xs opacity-50">
-              본 지원 내용은 장우성의 여자친구 지원을 위한 내용으로,
-              Ajou-Life와는 무관합니다.
-            </p>
-          </CardFooter>
+          <CardBody>
+            <div>
+              <span>⭐ </span>
+              <span
+                className="animate-text bg-gradient-to-r from-green-500  via-emerald-500
+            to-indigo-500 bg-clip-text font-bold
+            text-transparent"
+              >
+                장우성
+              </span>
+              <span className="font-bold">의 </span>
+              <span
+                className="animate-text bg-gradient-to-r from-red-500  via-yellow-500
+            to-orange-500 bg-clip-text font-bold
+            text-transparent"
+              >
+                여자친구
+              </span>
+              <span className="font-bold"> 지원하기</span>
+              <span> ⭐</span>
+            </div>
+          </CardBody>
         </Card>
         <Modal
           isOpen={isOpen}
@@ -91,7 +108,13 @@ export default function MyInfoPage() {
                   <Button color="danger" variant="light" onPress={onClose}>
                     아.. 생각좀..
                   </Button>
-                  <Button color="primary" onPress={onClose}>
+                  <Button
+                    color="primary"
+                    onPress={() => {
+                      alert("지원되었습니다. 연락을 기다려주세요.");
+                      onClose();
+                    }}
+                  >
                     "가능"
                   </Button>
                 </ModalFooter>
