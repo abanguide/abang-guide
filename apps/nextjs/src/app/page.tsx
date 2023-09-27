@@ -88,35 +88,35 @@ export default function Home() {
         <div className="flex w-full flex-1 flex-row gap-2">
           <Card
             classNames={{
-              base: "flex-1",
-              body: "flex flex-col items-center gap-2",
+              base: "flex-1 bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              body: "flex flex-col items-center gap-2 text-white",
             }}
           >
             <CardBody>
               <InstagramIcon size={32} />
-              인스타그램
+              <div className="text-sm">인스타그램</div>
             </CardBody>
           </Card>
           <Card
             classNames={{
-              base: "flex-1",
-              body: "flex flex-col items-center gap-2",
+              base: "flex-1 bg-gradient-to-br from-blue-500 to-indigo-500 border-small border-white/50 shadow-indigo-500/30",
+              body: "flex flex-col items-center gap-2 text-white",
             }}
           >
             <CardBody>
               <FacebookIcon size={32} />
-              페이스북
+              <div className="text-sm">페이스북</div>
             </CardBody>
           </Card>
           <Card
             classNames={{
-              base: "flex-1",
-              body: "flex flex-col items-center gap-2",
+              base: "flex-1 bg-gradient-to-br from-green-500 to-emerald-500 border-small border-white/50 shadow-emerald-500/30",
+              body: "flex flex-col items-center gap-2 text-white",
             }}
           >
             <CardBody>
               <StickerIcon size={32} />
-              피드백
+              <div className="text-sm">피드백</div>
             </CardBody>
           </Card>
         </div>
