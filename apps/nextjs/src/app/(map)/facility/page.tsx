@@ -30,12 +30,12 @@ export default function FacilityPage() {
 
   return (
     <>
-      <div className="absolute bottom-0 z-10 mb-16 flex w-full justify-center">
-        <div className="bg-default-100 flex w-full flex-row flex-wrap gap-2 rounded-xl p-2">
+      <div className="absolute top-0 z-10 mt-8 flex max-w-full justify-center px-2">
+        <div className="bg-default-100 flex w-full flex-row gap-2 overflow-x-scroll rounded-xl p-2">
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: "bg-gradient-to-br from-purple-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
             }}
@@ -47,7 +47,7 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: "bg-gradient-to-br from-yellow-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
             }}
@@ -59,7 +59,7 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: "bg-gradient-to-br from-green-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
             }}
@@ -71,7 +71,7 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: "bg-gradient-to-br from-cyan-500 to-purple-500 border-small border-white/50 shadow-pink-500/30",
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
             }}
@@ -83,7 +83,7 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: "bg-gradient-to-br from-pink-500 to-red-500 border-small border-white/50 shadow-red-500/30",
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
             }}
@@ -95,7 +95,7 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-blue-500 border-small border-white/50 shadow-pink-500/30",
+              base: "bg-gradient-to-br from-indigo-500 to-blue-500 border-small border-white/50 shadow-blue-500/30",
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
             }}

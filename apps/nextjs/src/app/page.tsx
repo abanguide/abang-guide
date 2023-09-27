@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import {
   Button,
   Card,
@@ -15,16 +16,35 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import { FacebookIcon, InstagramIcon, StickerIcon } from "lucide-react";
+import { useTheme } from "next-themes";
+
+import ThemeSwitch from "./_components/ThemeSwitch";
 
 export default function Home() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <>
       <Navbar>
         <NavbarBrand>
           <p className="font-bold text-inherit">AJOU LIFE</p>
         </NavbarBrand>
+        <NavbarContent justify="end">
+          <NavbarItem>
+            <ThemeSwitch
+              isSelected={theme == "dark"}
+              onValueChange={(v) => {
+                if (v) {
+                  setTheme("dark");
+                } else {
+                  setTheme("light");
+                }
+              }}
+            />
+          </NavbarItem>
+        </NavbarContent>
       </Navbar>
-      <div className="flex w-full flex-col gap-2 px-4">
+      <div className="flex w-full flex-col gap-2 px-4 py-2">
         <Card
           classNames={{
             body: "p-1",

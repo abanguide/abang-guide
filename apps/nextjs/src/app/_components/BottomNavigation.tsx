@@ -14,6 +14,7 @@ export const BottomNavigation: React.FC = () => {
       size="lg"
       classNames={{
         base: "absolute bottom-0 mb-4 z-10",
+        tabList: "shadow-lg",
         tabContent: "w-10",
       }}
       onSelectionChange={(key) => {
