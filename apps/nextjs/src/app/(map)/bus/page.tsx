@@ -211,8 +211,8 @@ export default function BusPage() {
           src="/bus.png"
           className="max-w-none"
           style={{
-            width: "3rem",
-            height: "3rem",
+            width: "2rem",
+            height: "2rem",
             transform: `translate(0%, 50%) scaleX(-1)`,
           }}
         />

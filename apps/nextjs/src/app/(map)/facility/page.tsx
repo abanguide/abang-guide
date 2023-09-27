@@ -22,10 +22,12 @@ import { CustomOverlayMap } from "react-kakao-maps-sdk";
 
 export default function FacilityPage() {
   const [partnershipCategoryStatus, setPartnershipCategoryStatus] = useState({
-    restaurant: true,
+    printer: true,
     cafe: true,
-    bar: true,
-    etc: false,
+    restaurant: true,
+    vending: false,
+    smoking: false,
+    convenience: true,
   });
 
   return (
