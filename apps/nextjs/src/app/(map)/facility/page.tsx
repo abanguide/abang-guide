@@ -37,9 +37,18 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-purple-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: cn(
+                "bg-gradient-to-br from-purple-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+                !partnershipCategoryStatus.printer ? "opacity-disabled" : "",
+              ),
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+            onClick={() => {
+              setPartnershipCategoryStatus((prev) => ({
+                ...prev,
+                printer: !prev.printer,
+              }));
             }}
           >
             <PrinterIcon size={16} />
@@ -49,9 +58,18 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-yellow-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: cn(
+                "bg-gradient-to-br from-yellow-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+                !partnershipCategoryStatus.cafe ? "opacity-disabled" : "",
+              ),
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+            onClick={() => {
+              setPartnershipCategoryStatus((prev) => ({
+                ...prev,
+                cafe: !prev.cafe,
+              }));
             }}
           >
             <CoffeeIcon size={16} />
@@ -61,9 +79,18 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-green-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+              base: cn(
+                "bg-gradient-to-br from-green-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+                !partnershipCategoryStatus.restaurant ? "opacity-disabled" : "",
+              ),
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+            onClick={() => {
+              setPartnershipCategoryStatus((prev) => ({
+                ...prev,
+                restaurant: !prev.restaurant,
+              }));
             }}
           >
             <SoupIcon size={16} />
@@ -73,9 +100,18 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-cyan-500 to-purple-500 border-small border-white/50 shadow-pink-500/30",
+              base: cn(
+                "bg-gradient-to-br from-cyan-500 to-purple-500 border-small border-white/50 shadow-pink-500/30",
+                !partnershipCategoryStatus.vending ? "opacity-disabled" : "",
+              ),
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+            onClick={() => {
+              setPartnershipCategoryStatus((prev) => ({
+                ...prev,
+                vending: !prev.vending,
+              }));
             }}
           >
             <CupSodaIcon size={16} />
@@ -85,9 +121,18 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-pink-500 to-red-500 border-small border-white/50 shadow-red-500/30",
+              base: cn(
+                "bg-gradient-to-br from-pink-500 to-red-500 border-small border-white/50 shadow-red-500/30",
+                !partnershipCategoryStatus.smoking ? "opacity-disabled" : "",
+              ),
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+            onClick={() => {
+              setPartnershipCategoryStatus((prev) => ({
+                ...prev,
+                smoking: !prev.smoking,
+              }));
             }}
           >
             <CigaretteIcon size={16} />
@@ -97,9 +142,20 @@ export default function FacilityPage() {
           <Chip
             variant="shadow"
             classNames={{
-              base: "bg-gradient-to-br from-indigo-500 to-blue-500 border-small border-white/50 shadow-blue-500/30",
+              base: cn(
+                "bg-gradient-to-br from-indigo-500 to-blue-500 border-small border-white/50 shadow-blue-500/30",
+                !partnershipCategoryStatus.convenience
+                  ? "opacity-disabled"
+                  : "",
+              ),
               content:
                 "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+            onClick={() => {
+              setPartnershipCategoryStatus((prev) => ({
+                ...prev,
+                convenience: !prev.convenience,
+              }));
             }}
           >
             <StoreIcon size={16} />
