@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Button,
   Card,
@@ -22,6 +22,17 @@ export default function PartnershipPage() {
     bar: true,
     etc: true,
   });
+
+  const cardRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToCard = (index: number) => {
+    if (cardRef.current) {
+      cardRef.current.scrollTo({
+        left: cardRef.current.offsetWidth * index,
+        behavior: "smooth", // 부드럽게 스크롤
+      });
+    }
+  };
 
   const categorycolor = {
     restaurant: "bg-red-500",
@@ -465,6 +476,13 @@ export default function PartnershipPage() {
     setfilteredList(filtered);
   }, [partnershipCategoryStatus]);
 
+  // setInterval(() => {
+  //   if (cardRef.current) {
+  //     console.log(cardRef.current.scrollLeft);
+  //     console.log("width: ", cardRef.current.offsetWidth);
+  //   }
+  // }, 3000);
+
   return (
     <>
       <div className="absolute top-0 z-10 mt-8 flex w-full justify-center">
@@ -543,9 +561,19 @@ export default function PartnershipPage() {
           </Chip>
         </div>
       </div>
-      <div className="scrollbar-hide absolute bottom-0 z-10 mb-16 w-screen snap-x overflow-x-scroll whitespace-nowrap">
+      <div
+        ref={cardRef}
+        className="scrollbar-hide absolute bottom-0 z-10 mb-16 w-screen snap-x overflow-x-scroll whitespace-nowrap"
+      >
         {filteredList.map((data, index) => (
-          <div key={index} className="inline-block w-screen snap-center px-4">
+          <div
+            key={index}
+            className="inline-block w-screen snap-center px-4"
+            onClick={() => {
+              // setMapCenter({ lat: Number(data.lat), lng: Number(data.lng) });
+              console.log(data.name);
+            }}
+          >
             <Card
               className="overflow-x-hidden"
               classNames={{ base: "" }}
@@ -585,30 +613,17 @@ export default function PartnershipPage() {
           </div>
         ))}
       </div>
-      <CustomOverlayMap
-        position={{ lat: 33.55635, lng: 126.795841 }}
-        yAnchor={1}
-      >
-        <Popover placement="bottom" offset={20} showArrow>
-          <PopoverTrigger onClick={(e) => e.stopPropagation()}>
-            <Button>밀플랜비</Button>
-          </PopoverTrigger>
-          <PopoverContent>
-            <div className="px-1 py-2">
-              <div className="text-small font-bold">Popover Content</div>
-              <div className="text-tiny">This is the popover content</div>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </CustomOverlayMap>
       {filteredList.map((data, index) => (
         <CustomOverlayMap
           position={{ lat: Number(data.lat), lng: Number(data.lng) }}
+          key={index}
         >
           <div
             className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black
              `}
-            onClick={() => {}}
+            onClick={() => {
+              scrollToCard(index);
+            }}
             style={{
               width: "1rem",
               height: "1rem",
