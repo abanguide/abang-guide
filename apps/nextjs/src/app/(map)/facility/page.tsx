@@ -85,7 +85,7 @@ export default function FacilityPage() {
 
   return (
     <>
-      <div className="fixed top-0 z-10 mt-48 flex max-w-full justify-center px-2">
+      <div className="fixed top-0 z-10 mt-4 flex max-w-full justify-center px-2">
         <div className="bg-default-100 flex w-full flex-row gap-2 overflow-x-scroll rounded-xl p-2">
           {Categories.map((category) => (
             <Chip

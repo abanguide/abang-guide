@@ -12,7 +12,14 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@nextui-org/react";
-import { Phone, Star } from "lucide-react";
+import {
+  BeerIcon,
+  ChefHatIcon,
+  CoffeeIcon,
+  MoreHorizontalIcon,
+  Phone,
+  Star,
+} from "lucide-react";
 import { CustomOverlayMap, useMap } from "react-kakao-maps-sdk";
 import { Virtual } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
@@ -479,6 +486,41 @@ export default function PartnershipPage() {
   //   }
   // }, 3000);
 
+  const categoryInfo = {
+    restaurant: {
+      name: "식당",
+      mapIcon: (
+        <div>
+          <ChefHatIcon size={16} />
+        </div>
+      ),
+    },
+    cafe: {
+      name: "카페",
+      mapIcon: (
+        <div>
+          <CoffeeIcon size={16} />
+        </div>
+      ),
+    },
+    bar: {
+      name: "주점",
+      mapIcon: (
+        <div>
+          <BeerIcon size={16} />
+        </div>
+      ),
+    },
+    etc: {
+      name: "기타",
+      mapIcon: (
+        <div>
+          <MoreHorizontalIcon size={16} />
+        </div>
+      ),
+    },
+  };
+
   return (
     <>
       <div className="fixed top-0 z-10 mt-4 flex w-full justify-center">
@@ -558,6 +600,30 @@ export default function PartnershipPage() {
         </div>
       </div>
 
+      <div className="fixed bottom-0 z-10 mb-64 w-screen">
+        <Button
+          onPress={() => {
+            if ("geolocation" in navigator) {
+              navigator.geolocation.getCurrentPosition(
+                (position) => {
+                  map.panTo(
+                    new kakao.maps.LatLng(
+                      position.coords.latitude,
+                      position.coords.longitude,
+                    ),
+                  );
+                },
+                () => {},
+              );
+            } else {
+              /* geolocation IS NOT available */
+            }
+          }}
+        >
+          내 위치
+        </Button>
+      </div>
+
       <div className="fixed bottom-0 z-10 mb-16 w-screen">
         <Swiper
           virtual
@@ -590,7 +656,9 @@ export default function PartnershipPage() {
                         <h4 className="font-bold">{data.name}</h4>
                         <Star size={16} />
                       </div>
-                      <p className="text-xs">{data.category}</p>
+                      <p className="text-xs">
+                        {categoryInfo[data.category].name}
+                      </p>
                     </div>
 
                     <div>
@@ -624,17 +692,19 @@ export default function PartnershipPage() {
           position={{ lat: Number(data.lat), lng: Number(data.lng) }}
           key={index}
         >
-          <button
-            className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black`}
+          <div
+            className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black bg-red-500`}
             style={{
-              width: "1rem",
-              height: "1rem",
+              width: "1.5rem",
+              height: "1.5rem",
             }}
             key={index}
             onClick={() => {
               swiper?.slideTo(index);
             }}
-          />
+          >
+            {categoryInfo[data.category]?.mapIcon}
+          </div>
         </CustomOverlayMap>
       ))}
     </>
