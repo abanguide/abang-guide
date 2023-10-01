@@ -13,7 +13,6 @@ export const BottomNavigation: React.FC = () => {
       radius="lg"
       size="lg"
       classNames={{
-        base: "fixed bottom-0 mb-4 z-10",
         tabList: "shadow-lg",
         tabContent: "w-10",
       }}

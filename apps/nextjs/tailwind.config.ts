@@ -1,5 +1,6 @@
 import { nextui } from "@nextui-org/react";
 import type { Config } from "tailwindcss";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 import baseConfig from "@acme/tailwind-config";
 
@@ -13,6 +14,13 @@ export default {
     extend: {
       animation: {
         text: "text 4s linear infinite",
+      },
+      fontFamily: {
+        sans: [
+          "Spoqa Han Sans Neo",
+          "Spoqa Han Sans JP",
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
       keyframes: {
         text: {

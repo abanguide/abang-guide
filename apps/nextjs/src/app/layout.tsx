@@ -15,19 +15,8 @@ const fontSans = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Create T3 Turbo",
-  description: "Simple monorepo with shared backend for web & mobile apps",
-  openGraph: {
-    title: "Create T3 Turbo",
-    description: "Simple monorepo with shared backend for web & mobile apps",
-    url: "https://create-t3-turbo.vercel.app",
-    siteName: "Create T3 Turbo",
-  },
-  twitter: {
-    card: "summary_large_image",
-    site: "@jullerino",
-    creator: "@jullerino",
-  },
+  title: "Ajou Life",
+  description: "Ajou Life",
 };
 
 export default function Layout(props: { children: React.ReactNode }) {
@@ -38,8 +27,10 @@ export default function Layout(props: { children: React.ReactNode }) {
         <TRPCReactProvider headers={headers()}>
           <main className="flex min-h-screen flex-col items-center">
             {props.children}
-            <BottomNavigation />
           </main>
+          <aside className="fixed bottom-0 z-10 mb-4 flex w-full justify-center">
+            <BottomNavigation />
+          </aside>
         </TRPCReactProvider>
       </body>
     </html>
