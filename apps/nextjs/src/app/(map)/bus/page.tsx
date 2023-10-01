@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Card, CardBody, Chip, Divider } from "@nextui-org/react";
-import { Phone, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk";
 
 function currentTimer() {
@@ -12,6 +12,57 @@ function currentTimer() {
   const min = date.getMinutes();
   return hours * 60 + min;
 }
+const stop = [
+  {
+    locationId: 1,
+    lat: "37.29",
+    lng: "127.05",
+    name: "광교중앙역 1번 출구",
+  },
+  {
+    locationId: 2,
+    lat: "37.27",
+    lng: "127.00",
+    name: "수원역 9번/10번 출구",
+  },
+  {
+    locationId: 3,
+    lat: "37.28",
+    lng: "127.04",
+    name: "도서관 도로변",
+  },
+  {
+    locationId: 4,
+    lat: "37.28",
+    lng: "127.04",
+    name: "원천관 입구",
+  },
+  {
+    locationId: 5,
+    lat: "37.28",
+    lng: "127.05",
+    name: "율곡관 도로변",
+  },
+];
+
+const route = [
+  {
+    path: "아주대~광교중앙역",
+    time: [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1090],
+  },
+  {
+    path: "아주대~수원역",
+    time: [910, 1000, 1085],
+  },
+  {
+    path: "광교중앙역~아주대",
+    time: [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050],
+  },
+  {
+    path: "수원역~아주대",
+    time: [510, 590, 680],
+  },
+];
 
 export default function BusPage() {
   const [nowTime, setNow] = useState(currentTimer());
@@ -20,58 +71,6 @@ export default function BusPage() {
 
   const [open, setOpen] = useState(false);
   const router = useRouter();
-
-  const stop = [
-    {
-      locationId: 1,
-      lat: "37.29",
-      lng: "127.05",
-      name: "광교중앙역 1번 출구",
-    },
-    {
-      locationId: 2,
-      lat: "37.27",
-      lng: "127.00",
-      name: "수원역 9번/10번 출구",
-    },
-    {
-      locationId: 3,
-      lat: "37.28",
-      lng: "127.04",
-      name: "도서관 도로변",
-    },
-    {
-      locationId: 4,
-      lat: "37.28",
-      lng: "127.04",
-      name: "원천관 입구",
-    },
-    {
-      locationId: 5,
-      lat: "37.28",
-      lng: "127.05",
-      name: "율곡관 도로변",
-    },
-  ];
-
-  const route = [
-    {
-      path: "아주대~광교중앙역",
-      time: [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1090],
-    },
-    {
-      path: "아주대~수원역",
-      time: [910, 1000, 1085],
-    },
-    {
-      path: "광교중앙역~아주대",
-      time: [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050],
-    },
-    {
-      path: "수원역~아주대",
-      time: [510, 590, 680],
-    },
-  ];
 
   const notice = [
     {

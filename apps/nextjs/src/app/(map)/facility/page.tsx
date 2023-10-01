@@ -4,21 +4,75 @@ import { useRef, useState } from "react";
 import {
   Button,
   Chip,
+  ChipSlots,
   cn,
   Popover,
   PopoverContent,
   PopoverTrigger,
+  SlotsToClasses,
 } from "@nextui-org/react";
 import {
   CigaretteIcon,
   CoffeeIcon,
   CupSodaIcon,
+  LucideProps,
   Printer,
   PrinterIcon,
   SoupIcon,
   StoreIcon,
 } from "lucide-react";
 import { CustomOverlayMap } from "react-kakao-maps-sdk";
+
+const Categories = [
+  {
+    key: "printer",
+    icon: (props: LucideProps) => <PrinterIcon {...props} />,
+    name: "프린터",
+    className: {
+      base: "bg-gradient-to-br from-purple-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+    } as SlotsToClasses<ChipSlots>,
+  },
+  {
+    key: "cafe",
+    icon: (props: LucideProps) => <CoffeeIcon {...props} />,
+    name: "카페",
+    className: {
+      base: "bg-gradient-to-br from-yellow-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+    } as SlotsToClasses<ChipSlots>,
+  },
+  {
+    key: "restaurant",
+    icon: (props: LucideProps) => <SoupIcon {...props} />,
+    name: "식당",
+    className: {
+      base: "bg-gradient-to-br from-green-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
+    } as SlotsToClasses<ChipSlots>,
+  },
+  {
+    key: "vending",
+    icon: (props: LucideProps) => <CupSodaIcon {...props} />,
+    name: "자판기",
+    className: {
+      base: "bg-gradient-to-br from-cyan-500 to-purple-500 border-small border-white/50 shadow-pink-500/30",
+    } as SlotsToClasses<ChipSlots>,
+  },
+  {
+    key: "smoking",
+    icon: (props: LucideProps) => <CigaretteIcon {...props} />,
+    name: "흡연구역",
+    className: {
+      base: "bg-gradient-to-br from-pink-500 to-red-500 border-small border-white/50 shadow-red-500/30",
+    } as SlotsToClasses<ChipSlots>,
+  },
+  {
+    key: "convenience",
+    icon: (props: LucideProps) => <StoreIcon {...props} />,
+    name: "편의점",
+    className: {
+      base: "bg-gradient-to-br from-indigo-500 to-blue-500 border-small border-white/50 shadow-blue-500/30",
+    } as SlotsToClasses<ChipSlots>,
+  },
+];
 
 export default function FacilityPage() {
   const [partnershipCategoryStatus, setPartnershipCategoryStatus] = useState({
@@ -34,133 +88,31 @@ export default function FacilityPage() {
     <>
       <div className="absolute top-0 z-10 mt-8 flex max-w-full justify-center px-2">
         <div className="bg-default-100 flex w-full flex-row gap-2 overflow-x-scroll rounded-xl p-2">
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: cn(
-                "bg-gradient-to-br from-purple-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-                !partnershipCategoryStatus.printer ? "opacity-disabled" : "",
-              ),
-              content:
-                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
-            }}
-            onClick={() => {
-              setPartnershipCategoryStatus((prev) => ({
-                ...prev,
-                printer: !prev.printer,
-              }));
-            }}
-          >
-            <PrinterIcon size={16} />
-            프린터
-          </Chip>
-
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: cn(
-                "bg-gradient-to-br from-yellow-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-                !partnershipCategoryStatus.cafe ? "opacity-disabled" : "",
-              ),
-              content:
-                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
-            }}
-            onClick={() => {
-              setPartnershipCategoryStatus((prev) => ({
-                ...prev,
-                cafe: !prev.cafe,
-              }));
-            }}
-          >
-            <CoffeeIcon size={16} />
-            카페
-          </Chip>
-
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: cn(
-                "bg-gradient-to-br from-green-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-                !partnershipCategoryStatus.restaurant ? "opacity-disabled" : "",
-              ),
-              content:
-                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
-            }}
-            onClick={() => {
-              setPartnershipCategoryStatus((prev) => ({
-                ...prev,
-                restaurant: !prev.restaurant,
-              }));
-            }}
-          >
-            <SoupIcon size={16} />
-            식당
-          </Chip>
-
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: cn(
-                "bg-gradient-to-br from-cyan-500 to-purple-500 border-small border-white/50 shadow-pink-500/30",
-                !partnershipCategoryStatus.vending ? "opacity-disabled" : "",
-              ),
-              content:
-                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
-            }}
-            onClick={() => {
-              setPartnershipCategoryStatus((prev) => ({
-                ...prev,
-                vending: !prev.vending,
-              }));
-            }}
-          >
-            <CupSodaIcon size={16} />
-            자판기
-          </Chip>
-
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: cn(
-                "bg-gradient-to-br from-pink-500 to-red-500 border-small border-white/50 shadow-red-500/30",
-                !partnershipCategoryStatus.smoking ? "opacity-disabled" : "",
-              ),
-              content:
-                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
-            }}
-            onClick={() => {
-              setPartnershipCategoryStatus((prev) => ({
-                ...prev,
-                smoking: !prev.smoking,
-              }));
-            }}
-          >
-            <CigaretteIcon size={16} />
-            흡연구역
-          </Chip>
-
-          <Chip
-            variant="shadow"
-            classNames={{
-              base: cn(
-                "bg-gradient-to-br from-indigo-500 to-blue-500 border-small border-white/50 shadow-blue-500/30",
-                !partnershipCategoryStatus.convenience
-                  ? "opacity-disabled"
-                  : "",
-              ),
-              content:
-                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
-            }}
-            onClick={() => {
-              setPartnershipCategoryStatus((prev) => ({
-                ...prev,
-                convenience: !prev.convenience,
-              }));
-            }}
-          >
-            <StoreIcon size={16} />
-            편의점
-          </Chip>
+          {Categories.map((category) => (
+            <Chip
+              key={category.key}
+              variant="shadow"
+              classNames={{
+                base: cn(
+                  category.className?.base,
+                  !partnershipCategoryStatus[category.key]
+                    ? "opacity-disabled"
+                    : "",
+                ),
+                content:
+                  "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+              }}
+              onClick={() => {
+                setPartnershipCategoryStatus((prev) => ({
+                  ...prev,
+                  [category.key]: !prev[category.key],
+                }));
+              }}
+            >
+              <PrinterIcon size={16} />
+              {category.name}
+            </Chip>
+          ))}
         </div>
       </div>
       <CustomOverlayMap
