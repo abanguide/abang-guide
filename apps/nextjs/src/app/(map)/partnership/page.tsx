@@ -13,7 +13,12 @@ import {
   PopoverTrigger,
 } from "@nextui-org/react";
 import { Phone, Star } from "lucide-react";
-import { CustomOverlayMap } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, useMap } from "react-kakao-maps-sdk";
+import { Virtual } from "swiper/modules";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/virtual";
 
 export default function PartnershipPage() {
   const [partnershipCategoryStatus, setPartnershipCategoryStatus] = useState({
@@ -22,17 +27,6 @@ export default function PartnershipPage() {
     bar: true,
     etc: true,
   });
-
-  const cardRef = useRef<HTMLDivElement | null>(null);
-
-  const scrollToCard = (index: number) => {
-    if (cardRef.current) {
-      cardRef.current.scrollTo({
-        left: cardRef.current.offsetWidth * index,
-        behavior: "smooth", // 부드럽게 스크롤
-      });
-    }
-  };
 
   const categorycolor = {
     restaurant: "bg-red-500",
@@ -455,6 +449,8 @@ export default function PartnershipPage() {
   ];
 
   const [filteredList, setfilteredList] = useState(partnershipList);
+  const [swiper, setSwiper] = useState<SwiperClass>();
+  const map = useMap();
 
   useEffect(() => {
     const filtered = partnershipList.filter((data) => {
@@ -485,7 +481,7 @@ export default function PartnershipPage() {
 
   return (
     <>
-      <div className="absolute top-0 z-10 mt-8 flex w-full justify-center">
+      <div className="fixed top-0 z-10 mt-4 flex w-full justify-center">
         <div className="bg-default-100 flex flex-row gap-2 rounded-xl p-2">
           <Chip
             variant="dot"
@@ -561,75 +557,84 @@ export default function PartnershipPage() {
           </Chip>
         </div>
       </div>
-      <div
-        ref={cardRef}
-        className="scrollbar-hide absolute bottom-0 z-10 mb-16 w-screen snap-x overflow-x-scroll whitespace-nowrap"
-      >
-        {filteredList.map((data, index) => (
-          <div
-            key={index}
-            className="inline-block w-screen snap-center px-4"
-            onClick={() => {
-              // setMapCenter({ lat: Number(data.lat), lng: Number(data.lng) });
-              console.log(data.name);
-            }}
-          >
-            <Card
-              className="overflow-x-hidden"
-              classNames={{ base: "" }}
-              shadow="none"
-            >
-              <CardBody>
-                <div className="flex flex-row items-center">
-                  <div className="flex-1">
-                    <div className="flex flex-row items-center gap-2">
-                      <h4 className="font-bold">{data.name}</h4>
-                      <Star size={16} />
-                    </div>
-                    <p className="text-xs">{data.category}</p>
-                  </div>
 
-                  <div>
-                    <Button isIconOnly size="sm">
-                      <Phone size={16} />
-                    </Button>
+      <div className="fixed bottom-0 z-10 mb-16 w-screen">
+        <Swiper
+          virtual
+          modules={[Virtual]}
+          slidesPerView={1}
+          spaceBetween={30}
+          centeredSlides={true}
+          grabCursor={true}
+          onSwiper={setSwiper}
+          onSlideChangeTransitionStart={(swiper) => {
+            map.panTo(
+              new kakao.maps.LatLng(
+                Number(filteredList[swiper.realIndex].lat),
+                Number(filteredList[swiper.realIndex].lng),
+              ),
+            );
+          }}
+        >
+          {filteredList.map((data, index) => (
+            <SwiperSlide
+              key={index}
+              className="inline-block w-screen px-4"
+              virtualIndex={index}
+            >
+              <Card classNames={{ base: "overflow-x-hidden" }} shadow="none">
+                <CardBody>
+                  <div className="flex flex-row items-center">
+                    <div className="flex-1">
+                      <div className="flex flex-row items-center gap-2">
+                        <h4 className="font-bold">{data.name}</h4>
+                        <Star size={16} />
+                      </div>
+                      <p className="text-xs">{data.category}</p>
+                    </div>
+
+                    <div>
+                      <Button isIconOnly size="sm">
+                        <Phone size={16} />
+                      </Button>
+                    </div>
                   </div>
-                </div>
-                <Divider className="my-2" />
-                <div className="flex flex-col gap-2">
-                  <Chip color="success" variant="flat" size="sm">
-                    {data.detail}
-                  </Chip>
-                  {data.detail2 ? (
+                  <Divider className="my-2" />
+                  <div className="flex flex-col gap-2">
                     <Chip color="success" variant="flat" size="sm">
-                      {data.detail2}
+                      {data.detail}
                     </Chip>
-                  ) : (
-                    <div className="h-6" />
-                  )}
-                </div>
-              </CardBody>
-            </Card>
-          </div>
-        ))}
+                    {data.detail2 ? (
+                      <Chip color="success" variant="flat" size="sm">
+                        {data.detail2}
+                      </Chip>
+                    ) : (
+                      <div className="h-6" />
+                    )}
+                  </div>
+                </CardBody>
+              </Card>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
+
       {filteredList.map((data, index) => (
         <CustomOverlayMap
           position={{ lat: Number(data.lat), lng: Number(data.lng) }}
           key={index}
         >
-          <div
-            className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black
-             `}
-            onClick={() => {
-              scrollToCard(index);
-            }}
+          <button
+            className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black`}
             style={{
               width: "1rem",
               height: "1rem",
             }}
             key={index}
-          ></div>
+            onClick={() => {
+              swiper?.slideTo(index);
+            }}
+          />
         </CustomOverlayMap>
       ))}
     </>

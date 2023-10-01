@@ -124,7 +124,7 @@ export default function BusPage() {
 
   return (
     <>
-      <div className="absolute left-1/2 top-4 z-10 h-[5vh] w-[80vw] -translate-x-1/2 whitespace-nowrap">
+      <div className="fixed left-1/2 top-4 z-10 h-[5vh] w-[80vw] -translate-x-1/2 whitespace-nowrap">
         <Card className="h-full">
           <CardBody className="justify-center overflow-y-hidden">
             <div className="badge badge-error gap-2">
@@ -148,7 +148,7 @@ export default function BusPage() {
         </Card>
       </div>
       {open && (
-        <div className="absolute left-1/2 top-[4.5rem] z-10 flex h-fit w-[80vw] -translate-x-1/2 flex-col gap-y-3 whitespace-nowrap">
+        <div className="fixed left-1/2 top-[4.5rem] z-10 flex h-fit w-[80vw] -translate-x-1/2 flex-col gap-y-3 whitespace-nowrap">
           {notice.map((data, index) => (
             <div key={index} className={"h-[5vh]"}>
               <Card className="h-full">
@@ -171,7 +171,7 @@ export default function BusPage() {
           ))}
         </div>
       )}
-      <div className="scrollbar-hide absolute bottom-0 z-10 mb-16 w-screen snap-x overflow-x-scroll whitespace-nowrap">
+      <div className="scrollbar-hide fixed bottom-0 z-10 mb-16 w-screen snap-x overflow-x-scroll whitespace-nowrap">
         {route.map((data, index) => (
           <div key={index} className="inline-block w-screen snap-center px-4">
             <Card className="" classNames={{ base: "" }} shadow="none">

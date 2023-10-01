@@ -1,21 +1,20 @@
 "use client";
 
 import { useRef, useState } from "react";
+import type { ChipSlots, SlotsToClasses } from "@nextui-org/react";
 import {
   Button,
   Chip,
-  ChipSlots,
   cn,
   Popover,
   PopoverContent,
   PopoverTrigger,
-  SlotsToClasses,
 } from "@nextui-org/react";
+import type { LucideProps } from "lucide-react";
 import {
   CigaretteIcon,
   CoffeeIcon,
   CupSodaIcon,
-  LucideProps,
   Printer,
   PrinterIcon,
   SoupIcon,
@@ -86,7 +85,7 @@ export default function FacilityPage() {
 
   return (
     <>
-      <div className="absolute top-0 z-10 mt-8 flex max-w-full justify-center px-2">
+      <div className="fixed top-0 z-10 mt-48 flex max-w-full justify-center px-2">
         <div className="bg-default-100 flex w-full flex-row gap-2 overflow-x-scroll rounded-xl p-2">
           {Categories.map((category) => (
             <Chip

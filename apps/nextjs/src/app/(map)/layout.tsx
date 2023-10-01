@@ -1,20 +1,31 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Map } from "react-kakao-maps-sdk";
 
 export default function MapLayout({ children }: React.PropsWithChildren) {
+  const rootRef = useRef<HTMLDivElement>(null);
+
   const [mapCenter, setMapCenter] = useState({
     lat: 37.28022225696853,
     lng: 127.043874901048,
   });
 
-  const changeCenter = (lat: number, lng: number) => {
-    setMapCenter({ lat, lng });
-  };
+  useEffect(() => {
+    const f = () => {
+      rootRef.current!.style.height = `${window.innerHeight}px`;
+    };
+
+    f();
+    window.addEventListener("resize", f);
+
+    return () => {
+      window.removeEventListener("resize", f);
+    };
+  }, []);
 
   return (
-    <div className="absolute h-screen w-screen">
+    <div className="absolute w-screen" ref={rootRef}>
       <Map
         id="map"
         center={mapCenter}
