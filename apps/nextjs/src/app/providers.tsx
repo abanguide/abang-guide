@@ -65,7 +65,7 @@ export function TRPCReactProvider(props: {
             </NextThemesProvider>
           </NextUIProvider>
         </ReactQueryStreamedHydration>
-        <ReactQueryDevtools initialIsOpen={false} />
+        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>
     </api.Provider>
   );
