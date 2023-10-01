@@ -20,7 +20,14 @@ import {
   SoupIcon,
   StoreIcon,
 } from "lucide-react";
-import { CustomOverlayMap } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Polygon } from "react-kakao-maps-sdk";
+
+const librarySmokeArea = [
+  { lat: 37.281742542025846, lng: 127.04446214710808 },
+  { lat: 37.28174921808935, lng: 127.04467921833458 },
+  { lat: 37.28168614428172, lng: 127.0446820001031 },
+  { lat: 37.28168622601714, lng: 127.04446493303307 },
+];
 
 const Categories = [
   {
@@ -114,6 +121,15 @@ export default function FacilityPage() {
           ))}
         </div>
       </div>
+      <Polygon
+        path={librarySmokeArea}
+        strokeWeight={3} // 선의 두께입니다
+        strokeColor={"#FF0000"} // 선의 색깔입니다
+        strokeOpacity={0.8} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
+        strokeStyle={"solid"} // 선의 스타일입니다
+        fillColor={"#FF3333"} // 채우기 색깔입니다
+        fillOpacity={0.7} // 채우기 불투명도 입니다
+      />
       <CustomOverlayMap
         position={{ lat: 33.55635, lng: 126.795841 }}
         yAnchor={1}

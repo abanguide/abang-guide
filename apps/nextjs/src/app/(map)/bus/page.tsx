@@ -2,9 +2,12 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Card, CardBody, Chip, Divider } from "@nextui-org/react";
-import { Star } from "lucide-react";
-import { CustomOverlayMap, MapMarker } from "react-kakao-maps-sdk";
+import { Button, Card, CardBody, Chip, Divider } from "@nextui-org/react";
+import { Phone, Star } from "lucide-react";
+import { CustomOverlayMap, MapMarker, useMap } from "react-kakao-maps-sdk";
+import { Virtual } from "swiper/modules";
+import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
+import { map } from "zod";
 
 function currentTimer() {
   const date = new Date();
@@ -94,6 +97,9 @@ export default function BusPage() {
     setNow(currentTimer());
   }, 5000);
 
+  const [swiper, setSwiper] = useState<SwiperClass>();
+  const map = useMap();
+
   useEffect(() => {
     const temp = [];
     for (let i = 0; i < route.length; i++) {
@@ -171,37 +177,83 @@ export default function BusPage() {
           ))}
         </div>
       )}
-      <div className="scrollbar-hide fixed bottom-0 z-10 mb-16 w-screen snap-x overflow-x-scroll whitespace-nowrap">
-        {route.map((data, index) => (
-          <div key={index} className="inline-block w-screen snap-center px-4">
-            <Card className="" classNames={{ base: "" }} shadow="none">
-              <CardBody>
-                <div className="flex flex-row items-center">
-                  <div className="flex-1">
-                    <div className="flex flex-row items-center gap-2">
-                      <h4 className="font-bold">{data.path}</h4>
-                      <Star size={16} />
+
+      <div className="fixed bottom-0 z-10 mb-16 w-screen">
+        <Swiper
+          virtual
+          modules={[Virtual]}
+          slidesPerView={1}
+          spaceBetween={30}
+          centeredSlides={true}
+          grabCursor={true}
+          onSwiper={setSwiper}
+        >
+          {route.map((data, index) => (
+            <SwiperSlide
+              key={index}
+              className="w-screen px-4"
+              virtualIndex={index}
+            >
+              <Card shadow="none">
+                <CardBody>
+                  <div className="flex flex-row items-center">
+                    <div className="flex-1">
+                      <div className="flex flex-row items-center gap-2">
+                        <h4 className="font-bold">{data.path}</h4>
+                        <Star size={16} />
+                      </div>
                     </div>
                   </div>
-                </div>
-                <Divider className="my-2" />
-                <div className="flex flex-col gap-2">
-                  <Chip color="success" variant="flat" size="sm">
-                    {remain[0 + 2 * index] !== -1
-                      ? remain[0 + 2 * index] + "분 뒤"
-                      : "운행 종료"}
-                  </Chip>
-                  <Chip color="success" variant="flat" size="sm">
-                    {remain[1 + 2 * index] !== -1
-                      ? remain[1 + 2 * index] + "분 뒤"
-                      : "운행 종료"}
-                  </Chip>
-                </div>
-              </CardBody>
-            </Card>
-          </div>
-        ))}
+                  <Divider className="my-2" />
+                  <div className="flex flex-row gap-2">
+                    <div className="flex flex-1 flex-col gap-2">
+                      <h4 className="text-sm font-bold">아주대 행</h4>
+                      <div className="flex flex-row items-center justify-between text-sm">
+                        <span>8시 10분</span>
+                        <Chip color="success" variant="flat" size="sm">
+                          {remain[0 + 2 * index] !== -1
+                            ? remain[0 + 2 * index] + "분 뒤"
+                            : "운행 종료"}
+                        </Chip>
+                      </div>
+                      <div className="flex flex-row items-center justify-between text-sm">
+                        <span>8시 10분</span>
+                        <Chip color="success" variant="flat" size="sm">
+                          {remain[1 + 2 * index] !== -1
+                            ? remain[1 + 2 * index] + "분 뒤"
+                            : "운행 종료"}
+                        </Chip>
+                      </div>
+                    </div>
+                    <div className="flex flex-1 flex-col gap-2">
+                      {/* FIXME: 목적지 이름 */}
+                      <h4 className="text-sm font-bold">광교중앙역 행</h4>
+                      <div className="flex flex-row items-center justify-between text-sm">
+                        <span>8시 10분</span>
+                        <Chip color="success" variant="flat" size="sm">
+                          {remain[0 + 2 * index] !== -1
+                            ? remain[0 + 2 * index] + "분 뒤"
+                            : "운행 종료"}
+                        </Chip>
+                      </div>
+
+                      <div className="flex flex-row items-center justify-between text-sm">
+                        <span>8시 10분</span>
+                        <Chip color="success" variant="flat" size="sm">
+                          {remain[1 + 2 * index] !== -1
+                            ? remain[1 + 2 * index] + "분 뒤"
+                            : "운행 종료"}
+                        </Chip>
+                      </div>
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
+
       <CustomOverlayMap
         position={{ lat: 37.28148, lng: 127.04353 }}
         yAnchor={1}
