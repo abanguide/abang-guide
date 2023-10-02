@@ -16,6 +16,7 @@ import {
   BeerIcon,
   ChefHatIcon,
   CoffeeIcon,
+  LocateFixedIcon,
   MoreHorizontalIcon,
   Phone,
   Star,
@@ -493,13 +494,6 @@ export default function PartnershipPage() {
     setfilteredList(filtered);
   }, [partnershipCategoryStatus]);
 
-  // setInterval(() => {
-  //   if (cardRef.current) {
-  //     console.log(cardRef.current.scrollLeft);
-  //     console.log("width: ", cardRef.current.offsetWidth);
-  //   }
-  // }, 3000);
-
   const categoryInfo = {
     restaurant: {
       name: "식당",
@@ -616,6 +610,7 @@ export default function PartnershipPage() {
 
       <div className="fixed bottom-0 z-10 mb-64 w-screen">
         <Button
+          isIconOnly
           onPress={() => {
             if ("geolocation" in navigator) {
               navigator.geolocation.getCurrentPosition(
@@ -634,7 +629,7 @@ export default function PartnershipPage() {
             }
           }}
         >
-          내 위치
+          <LocateFixedIcon size={16} />
         </Button>
       </div>
 

@@ -6,6 +6,7 @@ import { Bus, HeartHandshake, Home, Sofa, User } from "lucide-react";
 
 export const BottomNavigation: React.FC = () => {
   const router = useRouter();
+
   return (
     <Tabs
       color={"primary"}

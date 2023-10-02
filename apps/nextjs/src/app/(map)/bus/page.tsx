@@ -7,7 +7,9 @@ import { Phone, Star } from "lucide-react";
 import { CustomOverlayMap, MapMarker, useMap } from "react-kakao-maps-sdk";
 import { Virtual } from "swiper/modules";
 import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
-import { map } from "zod";
+
+import "swiper/css";
+import "swiper/css/virtual";
 
 function currentTimer() {
   const date = new Date();
