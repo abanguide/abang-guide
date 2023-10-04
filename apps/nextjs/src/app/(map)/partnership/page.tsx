@@ -29,6 +29,7 @@ import "swiper/css";
 import "swiper/css/virtual";
 
 export default function PartnershipPage() {
+  type TPartnershipcategory = "restaurant" | "cafe" | "bar" | "etc";
   const [partnershipCategoryStatus, setPartnershipCategoryStatus] = useState({
     restaurant: true,
     cafe: true,
@@ -645,8 +646,8 @@ export default function PartnershipPage() {
           onSlideChangeTransitionStart={(swiper) => {
             map.panTo(
               new kakao.maps.LatLng(
-                Number(filteredList[swiper.realIndex].lat),
-                Number(filteredList[swiper.realIndex].lng),
+                Number(filteredList[swiper.realIndex]?.lat),
+                Number(filteredList[swiper.realIndex]?.lng),
               ),
             );
           }}
@@ -666,7 +667,10 @@ export default function PartnershipPage() {
                         <Star size={16} />
                       </div>
                       <p className="text-xs">
-                        {categoryInfo[data.category].name}
+                        {
+                          categoryInfo[data.category as TPartnershipcategory]
+                            .name
+                        }
                       </p>
                     </div>
 
@@ -707,7 +711,7 @@ export default function PartnershipPage() {
               swiper?.slideTo(index);
             }}
           >
-            {categoryInfo[data.category]?.mapIcon}
+            {categoryInfo[data.category as TPartnershipcategory]?.mapIcon}
           </div>
           {map.getLevel() < 3 && <div>{data.name}</div>}
         </CustomOverlayMap>

@@ -11,6 +11,9 @@ import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/virtual";
 
+import "swiper/css";
+import "swiper/css/virtual";
+
 function currentTimer() {
   const date = new Date();
   const hours = date.getHours();
@@ -53,21 +56,27 @@ const stop = [
 const route = [
   {
     path: "아주대~광교중앙역",
-    time: [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1090],
+    FromTime: [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050],
+    ToTime: [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1090],
   },
   {
     path: "아주대~수원역",
-    time: [910, 1000, 1085],
-  },
-  {
-    path: "광교중앙역~아주대",
-    time: [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050],
-  },
-  {
-    path: "수원역~아주대",
-    time: [510, 590, 680],
+    FromTime: [510, 590, 680],
+    ToTime: [910, 1000, 1085],
   },
 ];
+
+function TimeToString(now: number, remain: number) {
+  const hours = Math.floor((now + remain) / 60);
+  const min = (now + remain) % 60;
+  console.log("hours", hours, "min", min);
+  return (
+    hours.toString().padStart(2, "0") +
+    "시 " +
+    min.toString().padStart(2, "0") +
+    "분"
+  );
+}
 
 export default function BusPage() {
   const [nowTime, setNow] = useState(currentTimer());
@@ -105,7 +114,7 @@ export default function BusPage() {
   useEffect(() => {
     const temp = [];
     for (let i = 0; i < route.length; i++) {
-      const routeTime = route[i]?.time;
+      const routeTime = route[i]?.FromTime;
       if (routeTime) {
         for (let j = 0; j < routeTime.length; j++) {
           if ((routeTime[j] ?? 0) > nowTime) {
@@ -119,14 +128,40 @@ export default function BusPage() {
           }
         }
         if (temp.length === i) {
-          temp.push(-1);
-          temp.push(-1);
+          temp.push(-1, -1);
+          console.log("push");
+        }
+      }
+      console.log("from ", i);
+    }
+    console.log("From: ", temp);
+    for (let i = 0; i < route.length; i++) {
+      const routeTime = route[i]?.ToTime;
+      if (routeTime) {
+        for (let j = 0; j < routeTime.length; j++) {
+          if ((routeTime[j] ?? 0) > nowTime) {
+            temp.push((routeTime[j] ?? 0) - nowTime);
+            if (j + 1 < routeTime.length) {
+              temp.push((routeTime[j + 1] ?? 0) - nowTime);
+            } else {
+              temp.push(-1);
+            }
+            break;
+          }
+        }
+        if (temp.length === i) {
+          temp.push(-1, -1);
         }
       }
     }
-    console.log(temp);
-    setRemain(temp);
+    if (temp.length >= 8) {
+      setRemain(temp);
+    }
   }, [nowTime]);
+
+  useEffect(() => {
+    console.log("remain: ", remain);
+  }, [remain]);
 
   // (data.time.filter((time) => time > nowTime)[0] !== undefined ?  (data.time.filter((time) => time > nowTime)[0] - nowTime + "분 뒤") : "운행종료")
 
@@ -209,9 +244,15 @@ export default function BusPage() {
                   <Divider className="my-2" />
                   <div className="flex flex-row gap-2">
                     <div className="flex flex-1 flex-col gap-2">
-                      <h4 className="text-sm font-bold">아주대 행</h4>
+                      <h4 className="text-sm font-bold">
+                        {data.path.split("~")[0] + " 행"}
+                      </h4>
                       <div className="flex flex-row items-center justify-between text-sm">
-                        <span>8시 10분</span>
+                        <span>
+                          {remain[0 + 2 * index] !== -1
+                            ? TimeToString(nowTime, remain[0 + 2 * index]!)
+                            : "운행종료"}
+                        </span>
                         <Chip color="success" variant="flat" size="sm">
                           {remain[0 + 2 * index] !== -1
                             ? remain[0 + 2 * index] + "분 뒤"
@@ -219,7 +260,11 @@ export default function BusPage() {
                         </Chip>
                       </div>
                       <div className="flex flex-row items-center justify-between text-sm">
-                        <span>8시 10분</span>
+                        <span>
+                          {remain[1 + 2 * index] !== -1
+                            ? TimeToString(nowTime, remain[1 + 2 * index]!)
+                            : "운행종료"}
+                        </span>
                         <Chip color="success" variant="flat" size="sm">
                           {remain[1 + 2 * index] !== -1
                             ? remain[1 + 2 * index] + "분 뒤"
@@ -229,21 +274,31 @@ export default function BusPage() {
                     </div>
                     <div className="flex flex-1 flex-col gap-2">
                       {/* FIXME: 목적지 이름 */}
-                      <h4 className="text-sm font-bold">광교중앙역 행</h4>
+                      <h4 className="text-sm font-bold">
+                        {data.path.split("~")[1] + " 행"}
+                      </h4>
                       <div className="flex flex-row items-center justify-between text-sm">
-                        <span>8시 10분</span>
+                        <span>
+                          {remain[4 + 2 * index] !== -1
+                            ? TimeToString(nowTime, remain[4 + 2 * index]!)
+                            : "운행종료"}
+                        </span>
                         <Chip color="success" variant="flat" size="sm">
-                          {remain[0 + 2 * index] !== -1
-                            ? remain[0 + 2 * index] + "분 뒤"
+                          {remain[4 + 2 * index] !== -1
+                            ? remain[4 + 2 * index] + "분 뒤"
                             : "운행 종료"}
                         </Chip>
                       </div>
 
                       <div className="flex flex-row items-center justify-between text-sm">
-                        <span>8시 10분</span>
+                        <span>
+                          {remain[5 + 2 * index] !== -1
+                            ? TimeToString(nowTime, remain[5 + 2 * index]!)
+                            : "운행종료"}
+                        </span>
                         <Chip color="success" variant="flat" size="sm">
-                          {remain[1 + 2 * index] !== -1
-                            ? remain[1 + 2 * index] + "분 뒤"
+                          {remain[5 + 2 * index] !== -1
+                            ? remain[5 + 2 * index] + "분 뒤"
                             : "운행 종료"}
                         </Chip>
                       </div>

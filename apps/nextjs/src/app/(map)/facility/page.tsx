@@ -22,11 +22,283 @@ import {
 } from "lucide-react";
 import { CustomOverlayMap, Polygon } from "react-kakao-maps-sdk";
 
+type TCategoryKey =
+  | "printer"
+  | "cafe"
+  | "restaurant"
+  | "vending"
+  | "smoking"
+  | "convenience";
+
 const librarySmokeArea = [
   { lat: 37.281742542025846, lng: 127.04446214710808 },
   { lat: 37.28174921808935, lng: 127.04467921833458 },
   { lat: 37.28168614428172, lng: 127.0446820001031 },
   { lat: 37.28168622601714, lng: 127.04446493303307 },
+];
+
+const facilityList = [
+  {
+    amenityId: 79,
+    name: "교직원식당",
+    image: null,
+    category: "CAFETERIA",
+    detail: "기숙사 식당 2층",
+    lat: "37.284639",
+    lng: "127.045721",
+  },
+  {
+    amenityId: 80,
+    name: "감탄떡볶이 아주대학교점",
+    image: null,
+    category: "CAFETERIA",
+    detail: "제 1학생회관(구학생회관) 1층 아슐랭",
+    lat: "37.283623",
+    lng: "127.045365",
+  },
+  {
+    amenityId: 81,
+    name: "바겟버거 아주대점",
+    image: null,
+    category: "CAFETERIA",
+    detail: "제 1학생회관(구학생회관) 1층 아슐랭",
+    lat: "37.283623",
+    lng: "127.045365",
+  },
+  {
+    amenityId: 82,
+    name: "만권화밥 아주대점",
+    image: null,
+    category: "CAFETERIA",
+    detail: "제 1학생회관(구학생회관) 1층 아슐랭",
+    lat: "37.283623",
+    lng: "127.045365",
+  },
+  {
+    amenityId: 83,
+    name: "삼삼돈까스 아주대점",
+    image: null,
+    category: "CAFETERIA",
+    detail: "제 1학생회관(구학생회관) 1층 아슐랭",
+    lat: "37.283623",
+    lng: "127.045365",
+  },
+  {
+    amenityId: 84,
+    name: "밀양국밥냉면",
+    image: null,
+    category: "CAFETERIA",
+    detail: "제 1학생회관(구학생회관) 1층 아슐랭",
+    lat: "37.283623",
+    lng: "127.045365",
+  },
+  {
+    amenityId: 85,
+    name: "기숙사식당",
+    image: null,
+    category: "CAFETERIA",
+    detail: "기숙사 식당1층",
+    lat: "37.284639",
+    lng: "127.045721",
+  },
+  {
+    amenityId: 86,
+    name: "팔달관매점",
+    image: null,
+    category: "CAFETERIA",
+    detail: "팔달관 1층",
+    lat: "37.284374",
+    lng: "127.044438",
+  },
+  {
+    amenityId: 87,
+    name: "다산관매점",
+    image: null,
+    category: "CAFETERIA",
+    detail: "",
+    lat: "37.283046",
+    lng: "127.047736",
+  },
+  {
+    amenityId: 88,
+    name: "코너스톤",
+    image: null,
+    category: "CAFETERIA",
+    detail: "연암관 12층",
+    lat: "37.282250",
+    lng: "127.047679",
+  },
+  {
+    amenityId: 89,
+    name: "선인재식당",
+    image: null,
+    category: "CAFETERIA",
+    detail: "송재관 지하 1층",
+    lat: "37.280926",
+    lng: "127.047258",
+  },
+  {
+    amenityId: 90,
+    name: "팬도로시 아주대 학생회관점",
+    image: null,
+    category: "CAFE",
+    detail: "제 1학생회관(구학생회관) 1층",
+    lat: "37.283515",
+    lng: "127.045030",
+  },
+  {
+    amenityId: 91,
+    name: "팬도로시 아주대도서관점",
+    image: null,
+    category: "CAFE",
+    detail: "도서관 카페",
+    lat: "37.281999",
+    lng: "127.044172",
+  },
+  {
+    amenityId: 92,
+    name: "다산관 카페",
+    image: null,
+    category: "CAFE",
+    detail: "다산관 1층",
+    lat: "37.283046",
+    lng: "127.047736",
+  },
+  {
+    amenityId: 93,
+    name: "무인카페",
+    image: null,
+    category: "CAFE",
+    detail: "기숙사 식당 1층",
+    lat: "37.284639",
+    lng: "127.045721",
+  },
+  {
+    amenityId: 94,
+    name: "아이엔지 아주대학교 일신관점",
+    image: null,
+    category: "CAFE",
+    detail: "일신관 지하 1층 CU 옆",
+    lat: "37.284305",
+    lng: "127.047012",
+  },
+  {
+    amenityId: 95,
+    name: "CU 아주대성호관점",
+    image: null,
+    category: "STORE",
+    detail: "성호관 1층",
+    lat: "37.283013",
+    lng: "127.044827",
+  },
+  {
+    amenityId: 96,
+    name: "CU 아주대일신관점",
+    image: null,
+    category: "STORE",
+    detail: "일신관 지하 1층",
+    lat: "37.284305",
+    lng: "127.047012",
+  },
+  {
+    amenityId: 97,
+    name: "CU 아주대팔달관점",
+    image: null,
+    category: "STORE",
+    detail: "1층 팔달관매점 내",
+    lat: "37.284374",
+    lng: "127.044438",
+  },
+  {
+    amenityId: 98,
+    name: "신학생회관 프린터",
+    image: null,
+    category: "PRINTER",
+    detail: "1층 웹PC 검색대",
+    lat: "37.283139",
+    lng: "127.045904",
+  },
+  {
+    amenityId: 99,
+    name: "신학생회관 팩스",
+    image: null,
+    category: "PRINTER",
+    detail: "제 2학생회관(신학생회관) 116호 종합지원센터",
+    lat: "37.283139",
+    lng: "127.045904",
+  },
+  {
+    amenityId: 100,
+    name: "팔달관 프린터",
+    image: null,
+    category: "PRINTER",
+    detail: "1층 계단실",
+    lat: "37.284383",
+    lng: "127.044593",
+  },
+  {
+    amenityId: 101,
+    name: "인문대 프린터실",
+    image: null,
+    category: "PRINTER",
+    detail: "성호관 103-1호, 무료",
+    lat: "37.282984",
+    lng: "127.044841",
+  },
+  {
+    amenityId: 102,
+    name: "다산관 로비",
+    image: null,
+    category: "FACILITIES",
+    detail: "다산관 1층",
+    lat: "37.283041",
+    lng: "127.047685",
+  },
+  {
+    amenityId: 103,
+    name: "더테라스",
+    image: null,
+    category: "FACILITIES",
+    detail: "도서관 테라스",
+    lat: "37.282664",
+    lng: "127.044246",
+  },
+  {
+    amenityId: 104,
+    name: "테니스장",
+    image: null,
+    category: "FACILITIES",
+    detail: " ",
+    lat: "37.282121",
+    lng: "127.049424",
+  },
+  {
+    amenityId: 105,
+    name: "체육관",
+    image: null,
+    category: "FACILITIES",
+    detail: " ",
+    lat: "37.279960",
+    lng: "127.045459",
+  },
+  {
+    amenityId: 106,
+    name: "아주문고",
+    image: null,
+    category: "STORE",
+    detail: "제1학생회관(구학생회관) 1층 서점",
+    lat: "37.283569",
+    lng: "127.045636",
+  },
+  {
+    amenityId: 107,
+    name: "안경점",
+    image: null,
+    category: "STORE",
+    detail: "성호관 1층",
+    lat: "37.283006",
+    lng: "127.044869",
+  },
 ];
 
 const Categories = [
@@ -101,7 +373,7 @@ export default function FacilityPage() {
               classNames={{
                 base: cn(
                   category.className?.base,
-                  !partnershipCategoryStatus[category.key]
+                  !partnershipCategoryStatus[category.key as TCategoryKey]
                     ? "opacity-disabled"
                     : "",
                 ),
@@ -111,7 +383,7 @@ export default function FacilityPage() {
               onClick={() => {
                 setPartnershipCategoryStatus((prev) => ({
                   ...prev,
-                  [category.key]: !prev[category.key],
+                  [category.key]: !prev[category.key as TCategoryKey],
                 }));
               }}
             >
