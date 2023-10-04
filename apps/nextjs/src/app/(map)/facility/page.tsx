@@ -12,15 +12,16 @@ import {
 } from "@nextui-org/react";
 import type { LucideProps } from "lucide-react";
 import {
+  ChefHatIcon,
   CigaretteIcon,
   CoffeeIcon,
   CupSodaIcon,
-  Printer,
+  GlassWaterIcon,
   PrinterIcon,
   SoupIcon,
   StoreIcon,
 } from "lucide-react";
-import { CustomOverlayMap, Polygon } from "react-kakao-maps-sdk";
+import { CustomOverlayMap, Polygon, useMap } from "react-kakao-maps-sdk";
 
 type TCategoryKey =
   | "printer"
@@ -362,6 +363,57 @@ export default function FacilityPage() {
     convenience: true,
   });
 
+  const categoryInfo = {
+    printer: {
+      name: "프린터",
+      mapIcon: (
+        <div>
+          <PrinterIcon size={16} />
+        </div>
+      ),
+    },
+    restaurant: {
+      name: "식당",
+      mapIcon: (
+        <div>
+          <ChefHatIcon size={16} />
+        </div>
+      ),
+    },
+    cafe: {
+      name: "카페",
+      mapIcon: (
+        <div>
+          <CoffeeIcon size={16} />
+        </div>
+      ),
+    },
+    vending: {
+      name: "자판기",
+      mapIcon: (
+        <div>
+          <GlassWaterIcon size={16} />
+        </div>
+      ),
+    },
+    smoking: {
+      name: "흡연구역",
+      mapIcon: (
+        <div>
+          <CigaretteIcon size={16} />
+        </div>
+      ),
+    },
+    convenience: {
+      name: "편의점",
+      mapIcon: (
+        <div>
+          <StoreIcon size={16} />
+        </div>
+      ),
+    },
+  };
+
   return (
     <>
       <div className="fixed top-0 z-10 mt-4 flex max-w-full justify-center px-2">
@@ -387,7 +439,7 @@ export default function FacilityPage() {
                 }));
               }}
             >
-              <PrinterIcon size={16} />
+              {categoryInfo[category.key as TCategoryKey]?.mapIcon}
               {category.name}
             </Chip>
           ))}
@@ -402,10 +454,24 @@ export default function FacilityPage() {
         fillColor={"#FF3333"} // 채우기 색깔입니다
         fillOpacity={0.7} // 채우기 불투명도 입니다
       />
-      <CustomOverlayMap
-        position={{ lat: 33.55635, lng: 126.795841 }}
-        yAnchor={1}
-      ></CustomOverlayMap>
+      {/* {facilityList.map((data, index) => (
+        <CustomOverlayMap
+          position={{ lat: Number(data.lat), lng: Number(data.lng) }}
+          key={index}
+        >
+          <div
+            className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black bg-red-500`}
+            style={{
+              width: "1.5rem",
+              height: "1.5rem",
+            }}
+            key={index}
+          >
+            {categoryInfo[data.category as TCategoryKey]?.mapIcon}
+          </div>
+          {map.getLevel() < 3 && <div>{data.name}</div>}
+        </CustomOverlayMap>
+      ))} */}
     </>
   );
 }
