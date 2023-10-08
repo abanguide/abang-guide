@@ -701,7 +701,10 @@ export default function PartnershipPage() {
           key={index}
         >
           <div
-            className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black bg-red-500`}
+            className={cn(
+              "flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black",
+              categorycolor[data.category],
+            )}
             style={{
               width: "1.5rem",
               height: "1.5rem",
