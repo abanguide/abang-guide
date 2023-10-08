@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { Tab, Tabs } from "@nextui-org/react";
-import { Bus, HeartHandshake, Home, Sofa, User } from "lucide-react";
+import { BikeIcon, Bus, HeartHandshake, Home, Sofa, User } from "lucide-react";
 
 export const BottomNavigation: React.FC = () => {
   const router = useRouter();
@@ -58,6 +58,15 @@ export const BottomNavigation: React.FC = () => {
           <div className="flex flex-col items-center">
             <Sofa size={20} />
             <span className="text-xs">편의시설</span>
+          </div>
+        }
+      />
+      <Tab
+        key="mobility"
+        title={
+          <div className="flex flex-col items-center">
+            <BikeIcon size={20} />
+            <span className="text-xs">모빌리티</span>
           </div>
         }
       />
