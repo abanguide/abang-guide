@@ -27,32 +27,32 @@ function currentTimer() {
 const stops = [
   {
     locationId: 1,
-    lat: "37.29",
-    lng: "127.05",
+    lat: "37.287893",
+    lng: "127.052024",
     name: "광교중앙역 1번 출구",
   },
   {
     locationId: 2,
-    lat: "37.27",
-    lng: "127.00",
+    lat: "37.266509",
+    lng: "127.001494",
     name: "수원역 9번/10번 출구",
   },
   {
     locationId: 3,
-    lat: "37.28",
-    lng: "127.04",
+    lat: "37.281279",
+    lng: "127.044202",
     name: "도서관 도로변",
   },
   {
     locationId: 4,
-    lat: "37.28",
-    lng: "127.04",
+    lat: "37.282736",
+    lng: "127.043487",
     name: "원천관 입구",
   },
   {
     locationId: 5,
-    lat: "37.28",
-    lng: "127.05",
+    lat: "37.281762",
+    lng: "127.046335",
     name: "율곡관 도로변",
   },
 ];
