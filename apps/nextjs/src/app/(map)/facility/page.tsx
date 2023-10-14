@@ -454,7 +454,7 @@ export default function FacilityPage() {
         fillColor={"#FF3333"} // 채우기 색깔입니다
         fillOpacity={0.7} // 채우기 불투명도 입니다
       />
-      {/* {facilityList.map((data, index) => (
+      {facilityList.map((data, index) => (
         <CustomOverlayMap
           position={{ lat: Number(data.lat), lng: Number(data.lng) }}
           key={index}
@@ -469,9 +469,9 @@ export default function FacilityPage() {
           >
             {categoryInfo[data.category as TCategoryKey]?.mapIcon}
           </div>
-          {map.getLevel() < 3 && <div>{data.name}</div>}
+          <div>{data.name}</div>
         </CustomOverlayMap>
-      ))} */}
+      ))}
     </>
   );
 }

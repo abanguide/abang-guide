@@ -70,15 +70,6 @@ export const BottomNavigation: React.FC = () => {
           </div>
         }
       />
-      <Tab
-        key="myInfo"
-        title={
-          <div className="flex flex-col items-center">
-            <User size={20} />
-            <span className="text-xs">내 정보</span>
-          </div>
-        }
-      />
     </Tabs>
   );
 };

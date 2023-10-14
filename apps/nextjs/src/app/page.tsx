@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
+  Avatar,
   Button,
   Card,
   CardBody,
@@ -28,7 +29,7 @@ export default function Home() {
 
   return (
     <>
-      <Navbar>
+      <Navbar maxWidth="full">
         <NavbarBrand>
           <div className="flex flex-col justify-center">
             <p className="text-lg font-bold leading-none">AJOU LIFE</p>
@@ -45,6 +46,15 @@ export default function Home() {
                 } else {
                   setTheme("light");
                 }
+              }}
+            />
+          </NavbarItem>
+          <NavbarItem>
+            <Avatar
+              showFallback
+              src="https://images.unsplash.com/broken"
+              onClick={() => {
+                router.push("/myInfo");
               }}
             />
           </NavbarItem>
