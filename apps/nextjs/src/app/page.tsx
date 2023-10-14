@@ -123,7 +123,7 @@ export default function Home() {
             </CardBody>
           </Card>
         </div>
-        <Card className=" bg-gradient-to-br from-slate-600 to-slate-400">
+        <Card className="bg-gradient-to-br dark:from-slate-600 dark:to-slate-400">
           <CardBody>
             <Link
               href="http://forms.gle/yWoQfF33XpdFTpS6A"

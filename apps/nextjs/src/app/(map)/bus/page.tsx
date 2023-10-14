@@ -12,6 +12,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/virtual";
 
+function timeToStr(time: number) {
+  const hour = Math.floor(time / 60);
+  const min = time % 60;
+  return `${hour}시 ${min}분`;
+}
+
 function currentTimer() {
   const date = new Date();
   const hours = date.getHours();
@@ -57,82 +63,12 @@ const routes = [
     upward: {
       path: "광교중앙역 행",
       stopIds: [1, 3, 4, 5],
-      time: [790, 875, 965, 1040, 1090],
-      times: [
-        // 500
-        {
-          hour: 8,
-          minute: 20,
-          second: 0,
-        },
-        // 520
-        {
-          hour: 8,
-          minute: 40,
-          second: 0,
-        },
-        // 560
-        {
-          hour: 9,
-          minute: 20,
-          second: 0,
-        },
-        // 595
-        {
-          hour: 9,
-          minute: 55,
-          second: 0,
-        },
-        // 605
-        {
-          hour: 10,
-          minute: 5,
-          second: 0,
-        },
-        // 695
-        {
-          hour: 11,
-          minute: 35,
-          second: 0,
-        },
-      ],
+      time: [500, 520, 560, 595, 605, 695, 790, 875, 965, 1040, 1090],
     },
     downward: {
       path: "아주대 행",
       stopId: [1, 3, 4, 5],
-      time: [705, 800, 885, 975, 1050],
-      times: [
-        // 510
-        {
-          hour: 8,
-          minute: 30,
-          second: 0,
-        },
-        // 530
-        {
-          hour: 8,
-          minute: 50,
-          second: 0,
-        },
-        // 570
-        {
-          hour: 9,
-          minute: 30,
-          second: 0,
-        },
-        // 605
-        {
-          hour: 10,
-          minute: 5,
-          second: 0,
-        },
-        // 615
-        {
-          hour: 10,
-          minute: 15,
-          second: 0,
-        },
-      ],
+      time: [510, 530, 570, 605, 615, 705, 800, 885, 975, 1050],
     },
   },
   {
@@ -347,18 +283,16 @@ export default function BusPage() {
                       <h4 className="text-sm font-bold">{data.upward.path}</h4>
 
                       <div className="flex h-16 w-full flex-col gap-2 overflow-y-scroll">
-                        {data.upward.times?.map((time, index) => {
-                          const leftMinutes = 10;
-
+                        {data.upward.time?.map((time, index) => {
                           return (
                             <div
                               key={index}
                               className="flex flex-row items-center justify-between text-sm"
                             >
-                              <span>8시 10분</span>
+                              <span>{timeToStr(time)}</span>
                               <Chip color="success" variant="flat" size="sm">
-                                {remain[0 + 2 * index] !== -1
-                                  ? remain[0 + 2 * index] + "분 뒤"
+                                {time > nowTime
+                                  ? time - nowTime + "분 뒤"
                                   : "운행 종료"}
                               </Chip>
                             </div>
@@ -372,15 +306,15 @@ export default function BusPage() {
                       </h4>
 
                       <div className="flex h-16 w-full flex-col gap-2 overflow-y-scroll">
-                        {data.downward.times?.map((time, index) => (
+                        {data.downward.time?.map((time, index) => (
                           <div
                             key={index}
                             className="flex flex-row items-center justify-between text-sm"
                           >
-                            <span>8시 10분</span>
+                            <span>{timeToStr(time)}</span>
                             <Chip color="success" variant="flat" size="sm">
-                              {remain[0 + 2 * index] !== -1
-                                ? remain[0 + 2 * index] + "분 뒤"
+                              {time > nowTime
+                                ? time - nowTime + "분 뒤"
                                 : "운행 종료"}
                             </Chip>
                           </div>
