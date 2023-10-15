@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { Chip, Divider } from "@nextui-org/react";
+import { BikeIcon, ShipWheelIcon } from "lucide-react";
 import { CustomOverlayMap, useMap } from "react-kakao-maps-sdk";
 
 import { IElecleMobilityData } from "./_vendors/elecle";
@@ -36,7 +38,91 @@ export const MobilityMap: React.FC<{
   }, [map]);
 
   return (
-    <div>
+    <>
+      <div className="fixed right-0 top-16 z-10 mx-4 mt-4">
+        <div className="bg-default-100 flex flex-col items-end gap-2 rounded-xl p-2">
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            지쿠터
+          </Chip>
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            킥고잉
+          </Chip>
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            일렉클
+          </Chip>
+          <Divider />
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            카카오
+          </Chip>
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            스윙
+          </Chip>
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            씽씽
+          </Chip>
+        </div>
+      </div>
+
+      <div className="fixed left-0 top-16 z-10 mx-4 mt-4">
+        <div className="bg-default-100 flex flex-col items-start gap-2 rounded-xl p-2">
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            <ShipWheelIcon size={24} />
+            킥보드
+          </Chip>
+          <Chip
+            variant="shadow"
+            classNames={{
+              content:
+                "drop-shadow shadow-black text-white flex flex-row items-center gap-2",
+            }}
+          >
+            <BikeIcon size={24} />
+            자전거
+          </Chip>
+        </div>
+      </div>
       {gcooData.map((data, index) => (
         <CustomOverlayMap
           position={{ lat: data.lat, lng: data.lng }}
@@ -88,6 +174,6 @@ export const MobilityMap: React.FC<{
           </div>
         </CustomOverlayMap>
       ))}
-    </div>
+    </>
   );
 };
