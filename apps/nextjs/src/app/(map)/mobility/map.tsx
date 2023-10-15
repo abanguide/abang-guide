@@ -11,8 +11,7 @@ export const MobilityMap: React.FC<{
   gcooData: GcooData[];
   kickgoingData: IKickgoingScooterData[];
   elecleData: IElecleMobilityData[];
-  now: number;
-}> = ({ gcooData, kickgoingData, elecleData, now }) => {
+}> = ({ gcooData, kickgoingData, elecleData }) => {
   const map = useMap();
 
   const [bounds, setBounds] = useState<kakao.maps.LatLngBounds>(
@@ -38,14 +37,13 @@ export const MobilityMap: React.FC<{
 
   return (
     <div>
-      <div>{now}</div>
       {gcooData.map((data, index) => (
         <CustomOverlayMap
           position={{ lat: data.lat, lng: data.lng }}
           key={index}
         >
           <div
-            className={`flex translate-x-1/2 translate-y-1/2 select-none items-center justify-center rounded-full border-2 border-black bg-green-500`}
+            className={`flex -translate-x-1/2 -translate-y-1/2 select-none items-center justify-center rounded-full border-2 border-black bg-green-500`}
             style={{
               width: "1.5rem",
               height: "1.5rem",
@@ -62,7 +60,7 @@ export const MobilityMap: React.FC<{
           key={index}
         >
           <div
-            className={`flex translate-x-1/2 translate-y-1/2 select-none items-center justify-center rounded-full border-2 border-black bg-emerald-500`}
+            className={`flex -translate-x-1/2 -translate-y-1/2 select-none items-center justify-center rounded-full border-2 border-black bg-emerald-500`}
             style={{
               width: "1.5rem",
               height: "1.5rem",
@@ -79,7 +77,7 @@ export const MobilityMap: React.FC<{
           key={index}
         >
           <div
-            className={`flex translate-x-1/2 translate-y-1/2 select-none items-center justify-center rounded-full border-2 border-black bg-blue-500`}
+            className={`flex -translate-x-1/2 -translate-y-1/2 select-none items-center justify-center rounded-full border-2 border-black bg-blue-500`}
             style={{
               width: "1.5rem",
               height: "1.5rem",
