@@ -69,8 +69,15 @@ export default function Home() {
             }}
           >
             <CardBody>
+            <Link
+                href="https://www.instagram.com/ajou.life_/"
+                className="flex flex-col items-center"
+                passHref
+                target="_blank"
+              >
               <InstagramIcon size={32} />
               <div className="text-sm">인스타그램</div>
+              </Link>
             </CardBody>
           </Card>
           <Card
@@ -80,8 +87,15 @@ export default function Home() {
             }}
           >
             <CardBody>
+            <Link
+                href="https://www.facebook.com/ajou.life.2023?mibextid=LQQJ4d"
+                className="flex flex-col items-center"
+                passHref
+                target="_blank"
+              >
               <FacebookIcon size={32} />
               <div className="text-sm">페이스북</div>
+              </Link>
             </CardBody>
           </Card>
           <Card
