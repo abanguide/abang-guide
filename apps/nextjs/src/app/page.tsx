@@ -91,24 +91,19 @@ export default function Home() {
             }}
           >
             <CardBody>
-              <StickerIcon size={32} />
-              <div className="text-sm">피드백</div>
+              <Link
+                href="http://forms.gle/yWoQfF33XpdFTpS6A"
+                className="flex flex-col items-center"
+                passHref
+                target="_blank"
+              >
+                <StickerIcon size={32} />
+                <div className="text-sm">피드백</div>
+                <div className="text-sm">문의사항</div>
+              </Link>
             </CardBody>
           </Card>
         </div>
-        <Card className="bg-gradient-to-br dark:from-slate-600 dark:to-slate-400">
-          <CardBody>
-            <Link
-              href="http://forms.gle/yWoQfF33XpdFTpS6A"
-              passHref
-              target="_blank"
-            >
-              <div className="flex justify-center text-2xl">
-                문의사항 & 피드백 남기기
-              </div>
-            </Link>
-          </CardBody>
-        </Card>
       </div>
     </>
   );
