@@ -416,7 +416,7 @@ export default function FacilityPage() {
 
   return (
     <>
-      <div className="fixed top-0 z-10 mt-4 flex max-w-full justify-center px-2">
+      <div className="fixed top-16 z-10 mt-4 flex max-w-full justify-center px-2">
         <div className="bg-default-100 flex w-full flex-row gap-2 overflow-x-scroll rounded-xl p-2">
           {Categories.map((category) => (
             <Chip
@@ -445,15 +445,7 @@ export default function FacilityPage() {
           ))}
         </div>
       </div>
-      <Polygon
-        path={librarySmokeArea}
-        strokeWeight={3} // 선의 두께입니다
-        strokeColor={"#FF0000"} // 선의 색깔입니다
-        strokeOpacity={0.8} // 선의 불투명도 입니다 1에서 0 사이의 값이며 0에 가까울수록 투명합니다
-        strokeStyle={"solid"} // 선의 스타일입니다
-        fillColor={"#FF3333"} // 채우기 색깔입니다
-        fillOpacity={0.7} // 채우기 불투명도 입니다
-      />
+
       {facilityList.map((data, index) => (
         <CustomOverlayMap
           position={{ lat: Number(data.lat), lng: Number(data.lng) }}

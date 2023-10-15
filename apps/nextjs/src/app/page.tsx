@@ -19,47 +19,10 @@ import {
   NavbarItem,
 } from "@nextui-org/react";
 import { FacebookIcon, InstagramIcon, StickerIcon } from "lucide-react";
-import { useTheme } from "next-themes";
-
-import ThemeSwitch from "./_components/ThemeSwitch";
 
 export default function Home() {
-  const { theme, setTheme } = useTheme();
-  const router = useRouter();
-
   return (
     <>
-      <Navbar maxWidth="full">
-        <NavbarBrand>
-          <div className="flex flex-col justify-center">
-            <p className="text-lg font-bold leading-none">AJOU LIFE</p>
-            <p className="text-xs leading-none">장우성아직도여친구함</p>
-          </div>
-        </NavbarBrand>
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <ThemeSwitch
-              isSelected={theme == "dark"}
-              onValueChange={(v) => {
-                if (v) {
-                  setTheme("dark");
-                } else {
-                  setTheme("light");
-                }
-              }}
-            />
-          </NavbarItem>
-          <NavbarItem>
-            <Avatar
-              showFallback
-              src="https://images.unsplash.com/broken"
-              onClick={() => {
-                router.push("/myInfo");
-              }}
-            />
-          </NavbarItem>
-        </NavbarContent>
-      </Navbar>
       <div className="flex w-full flex-col gap-2 px-4 py-2">
         <Card
           classNames={{

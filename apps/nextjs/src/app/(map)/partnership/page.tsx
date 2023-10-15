@@ -532,7 +532,7 @@ export default function PartnershipPage() {
 
   return (
     <>
-      <div className="fixed top-0 z-10 mt-4 flex w-full justify-center">
+      <div className="fixed top-16 z-10 mt-4 flex w-full justify-center">
         <div className="bg-default-100 flex flex-row gap-2 rounded-xl p-2">
           <Chip
             variant="dot"
