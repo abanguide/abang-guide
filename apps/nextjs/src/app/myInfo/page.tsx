@@ -24,16 +24,8 @@ export default function MyInfoPage() {
 
   return (
     <>
-      <Navbar>
-        <NavbarBrand>
-          <div className="flex flex-col justify-center">
-            <p className="text-lg font-bold leading-none">AJOU LIFE</p>
-            <p className="text-xs leading-none">장우성아직여친구함</p>
-          </div>
-        </NavbarBrand>
-      </Navbar>
       <div className="flex w-full flex-col gap-4 px-4">
-        <Card>
+        {/* <Card>
           <CardBody>
             <User
               classNames={{
@@ -46,7 +38,7 @@ export default function MyInfoPage() {
               }}
             />
           </CardBody>
-        </Card>
+        </Card> */}
         <Card
           classNames={{
             base: "bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
@@ -111,7 +103,7 @@ export default function MyInfoPage() {
                   <Button
                     color="primary"
                     onPress={() => {
-                      alert("지원되었습니다. 연락을 기다려주세요.");
+                      alert("감사합니다.");
                       onClose();
                     }}
                   >

@@ -24,9 +24,12 @@ export default function Layout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={["font-sans", fontSans.variable].join(" ")}>
-        <Script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f1494ad8df2a9262259940f691221ac9&libraries=services,clusterer&autoload=false" />
+        <Script
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=f1494ad8df2a9262259940f691221ac9&libraries=services,clusterer&autoload=false"
+          strategy="beforeInteractive"
+        />
         <TRPCReactProvider headers={headers()}>
-          <main className="flex flex-col">
+          <main className="flex min-h-screen flex-col">
             <TopBar />
             <div className="w-full flex-1">{props.children}</div>
           </main>

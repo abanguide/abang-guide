@@ -495,6 +495,20 @@ export default function PartnershipPage() {
     setfilteredList(filtered);
   }, [partnershipCategoryStatus]);
 
+  const [level, setLevel] = useState(map.getLevel());
+
+  useEffect(() => {
+    const f = () => {
+      setLevel(map.getLevel());
+    };
+
+    kakao.maps.event.addListener(map, "zoom_changed", f);
+
+    return () => {
+      kakao.maps.event.removeListener(map, "zoom_changed", f);
+    };
+  }, [map]);
+
   const categoryInfo = {
     restaurant: {
       name: "식당",
@@ -681,7 +695,7 @@ export default function PartnershipPage() {
                     </div>
                   </div>
                   <Divider className="my-2" />
-                  <div className="flex flex-col gap-2">
+                  <div className="flex h-12 flex-col gap-2">
                     {data.details.map((detail, i) => (
                       <Chip key={i} color="success" variant="flat" size="sm">
                         {detail}
@@ -702,7 +716,7 @@ export default function PartnershipPage() {
         >
           <div
             className={cn(
-              "flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black",
+              "absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-black",
               categorycolor[data.category],
             )}
             style={{
@@ -716,7 +730,11 @@ export default function PartnershipPage() {
           >
             {categoryInfo[data.category as TPartnershipcategory]?.mapIcon}
           </div>
-          {map.getLevel() < 3 && <div>{data.name}</div>}
+          {level < 3 && (
+            <div className="absolute mt-4 -translate-x-1/2 rounded-md bg-gray-300 px-1 py-0.5 text-sm text-black">
+              {data.name}
+            </div>
+          )}
         </CustomOverlayMap>
       ))}
     </>

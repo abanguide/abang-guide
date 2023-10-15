@@ -13,7 +13,7 @@ export default function MapLayout({ children }: React.PropsWithChildren) {
 
   useEffect(() => {
     const f = () => {
-      rootRef.current!.style.height = `${window.innerHeight}px`;
+      rootRef.current!.style.height = `${window.innerHeight - 64}px`;
     };
 
     f();
@@ -25,7 +25,7 @@ export default function MapLayout({ children }: React.PropsWithChildren) {
   }, []);
 
   return (
-    <div className="absolute w-screen" ref={rootRef}>
+    <div className="h-full w-screen" ref={rootRef}>
       <Map
         id="map"
         center={mapCenter}

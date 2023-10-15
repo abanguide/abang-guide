@@ -416,8 +416,8 @@ export default function FacilityPage() {
 
   return (
     <>
-      <div className="fixed top-16 z-10 mt-4 flex max-w-full justify-center px-2">
-        <div className="bg-default-100 flex w-full flex-row gap-2 overflow-x-scroll rounded-xl p-2">
+      <div className="fixed top-16 z-10 mt-4 flex w-full justify-center">
+        <div className="bg-default-100 mx-2 flex max-w-full flex-row gap-2 overflow-x-scroll rounded-xl p-2">
           {Categories.map((category) => (
             <Chip
               key={category.key}
@@ -452,7 +452,7 @@ export default function FacilityPage() {
           key={index}
         >
           <div
-            className={`flex translate-x-1/2 translate-y-1/2 items-center justify-center rounded-full border-2 border-black bg-red-500`}
+            className={`absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-2 border-black bg-red-500`}
             style={{
               width: "1.5rem",
               height: "1.5rem",
@@ -461,7 +461,9 @@ export default function FacilityPage() {
           >
             {categoryInfo[data.category as TCategoryKey]?.mapIcon}
           </div>
-          <div>{data.name}</div>
+          <div className="absolute mt-4 -translate-x-1/2 rounded-md bg-gray-300 px-1 py-0.5 text-sm text-black">
+            {data.name}
+          </div>
         </CustomOverlayMap>
       ))}
     </>
