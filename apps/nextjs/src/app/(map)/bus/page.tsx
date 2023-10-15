@@ -56,7 +56,7 @@ const BusStopOverlay = () => {
           image={{
             src: "/bus_stop.png",
             size: {
-              width: 20,
+              width: 30,
               height: 30,
             },
           }}
@@ -70,7 +70,7 @@ const BusStopOverlay = () => {
         >
           {stopToast === stop.locationId && (
             <div
-              className="flex h-fit w-fit flex-1 flex-col items-center justify-center space-y-6 rounded-lg bg-black px-4 py-2"
+              className="bg-content1 text-content1-foreground flex h-fit w-fit flex-1 flex-col items-center justify-center space-y-6 rounded-lg  px-4 py-2"
               onClick={() => {
                 setStopToast(null);
               }}
@@ -93,7 +93,7 @@ const BusStopOverlay = () => {
               <img
                 src={""}
                 className="h-[10rem] w-[10rem] border-2"
-                alt="정류장 이미지 들어갈 곳"
+                alt="정류장 이미지"
               />
             </div>
           )}
@@ -126,53 +126,44 @@ export default function BusPage() {
 
   return (
     <>
-      <div className="fixed left-1/2 top-4 z-10 h-[5vh] w-[80vw] -translate-x-1/2 whitespace-nowrap">
-        <Card className="h-full">
-          <CardBody className="justify-center overflow-y-hidden">
-            <div className="badge badge-error gap-2">
-              <div
-                className="rounded-full px-3 py-1 text-xs"
-                onClick={() => {
-                  setOpen(!open);
-                }}
-              >
-                {open ? (
-                  <span>닫기</span>
-                ) : (
-                  <div>
-                    <span className="mr-2 font-bold">[공지]</span>
-                    <span>{notice[0]?.title}</span>
-                  </div>
-                )}
-              </div>
+      <div className="fixed top-16 z-10 mt-4 flex w-full select-none flex-col items-center gap-1 whitespace-nowrap">
+        <Card className="w-4/5">
+          <CardBody className="px-1 py-1">
+            <div
+              className="rounded-full px-3 py-1 text-xs"
+              onClick={() => {
+                setOpen(!open);
+              }}
+            >
+              {open ? (
+                <div>닫기</div>
+              ) : (
+                <div>
+                  <span className="mr-2 font-bold">[공지]</span>
+                  <span>{notice[0]?.title}</span>
+                </div>
+              )}
             </div>
           </CardBody>
         </Card>
-      </div>
-      {open && (
-        <div className="fixed left-1/2 top-[4.5rem] z-10 flex h-fit w-[80vw] -translate-x-1/2 flex-col gap-y-3 whitespace-nowrap">
-          {notice.map((data, index) => (
-            <div key={index} className={"h-[5vh]"}>
-              <Card className="h-full">
-                <CardBody className="justify-center overflow-y-hidden">
-                  <div className="badge badge-error gap-2">
-                    <div
-                      className="rounded-full px-3 py-1 text-xs"
-                      onClick={() => {
-                        router.push(data.url);
-                      }}
-                    >
-                      <div>
-                        <span>{data?.title}</span>
-                      </div>
-                    </div>
+        {open &&
+          notice.map((data, index) => (
+            <Card key={index} className="w-4/5">
+              <CardBody className="px-1 py-1">
+                <div className="badge badge-error gap-2">
+                  <div
+                    className="rounded-full px-3 py-1 text-xs"
+                    onClick={() => {
+                      router.push(data.url);
+                    }}
+                  >
+                    <span>{data.title}</span>
                   </div>
-                </CardBody>
-              </Card>
-            </div>
+                </div>
+              </CardBody>
+            </Card>
           ))}
-        </div>
-      )}
+      </div>
 
       <div className="fixed bottom-0 z-10 mb-16 w-screen">
         <Swiper

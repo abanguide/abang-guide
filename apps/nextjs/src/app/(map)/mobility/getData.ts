@@ -1,8 +1,8 @@
 import { cache } from "react";
 
-import { fetchElecleMobility } from "./elecle";
-import { fetchGcooMobility } from "./gcoo";
-import { fetchKickgoingMobility } from "./kickgoing";
+import { fetchElecleMobility } from "./_vendors/elecle";
+import { fetchGcooMobility } from "./_vendors/gcoo";
+import { fetchKickgoingMobility } from "./_vendors/kickgoing";
 
 export const revalidate = 60;
 

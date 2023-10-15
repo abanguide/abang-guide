@@ -1,6 +1,6 @@
 import { getMobilityDatas } from "./getData";
 import { MobilityMap } from "./map";
-import { fetchSwingMobility } from "./swing";
+import { fetchSwingMobility } from "./_vendors/swing";
 
 export const revalidate = 60;
 

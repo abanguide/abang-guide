@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { CustomOverlayMap, useMap } from "react-kakao-maps-sdk";
 
-import { IElecleMobilityData } from "./elecle";
-import type { GcooData } from "./gcoo";
-import type { IKickgoingScooterData } from "./kickgoing";
+import { IElecleMobilityData } from "./_vendors/elecle";
+import type { GcooData } from "./_vendors/gcoo";
+import type { IKickgoingScooterData } from "./_vendors/kickgoing";
 
 export const MobilityMap: React.FC<{
   gcooData: GcooData[];
