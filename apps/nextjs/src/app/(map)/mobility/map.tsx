@@ -26,8 +26,8 @@ export const MobilityMap: React.FC<{
 
     kakao.maps.event.addListener(map, "bounds_changed", f);
 
-    map.setLevel(3);
-    map.setMaxLevel(3);
+    map.setLevel(5);
+    map.setMaxLevel(5);
 
     return () => {
       kakao.maps.event.removeListener(map, "bounds_changed", f);
