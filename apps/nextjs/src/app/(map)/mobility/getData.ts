@@ -22,5 +22,6 @@ export const getMobilityDatas = cache(async () => {
     gcooData,
     kickgoingData,
     elecleData,
+    now: Date.now(),
   };
 });
