@@ -1,14 +1,10 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useState } from "react";
 import type { ChipSlots, SlotsToClasses } from "@nextui-org/react";
 import {
-  Button,
   Chip,
   cn,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
 } from "@nextui-org/react";
 import type { LucideProps } from "lucide-react";
 import {
@@ -21,15 +17,15 @@ import {
   SoupIcon,
   StoreIcon,
 } from "lucide-react";
-import { CustomOverlayMap, Polygon, useMap } from "react-kakao-maps-sdk";
+import { CustomOverlayMap } from "react-kakao-maps-sdk";
 
 type TCategoryKey =
-  | "printer"
-  | "cafe"
-  | "restaurant"
+  | "PRINTER"
+  | "CAFE"
+  | "CAFETERIA"
   | "vending"
   | "smoking"
-  | "convenience";
+  | "STORE";
 
 const librarySmokeArea = [
   { lat: 37.281742542025846, lng: 127.04446214710808 },
@@ -304,7 +300,7 @@ const facilityList = [
 
 const Categories = [
   {
-    key: "printer",
+    key: "PRINTER",
     icon: (props: LucideProps) => <PrinterIcon {...props} />,
     name: "프린터",
     className: {
@@ -312,7 +308,7 @@ const Categories = [
     } as SlotsToClasses<ChipSlots>,
   },
   {
-    key: "cafe",
+    key: "CAFE",
     icon: (props: LucideProps) => <CoffeeIcon {...props} />,
     name: "카페",
     className: {
@@ -320,7 +316,7 @@ const Categories = [
     } as SlotsToClasses<ChipSlots>,
   },
   {
-    key: "restaurant",
+    key: "CAFETERIA",
     icon: (props: LucideProps) => <SoupIcon {...props} />,
     name: "식당",
     className: {
@@ -344,7 +340,7 @@ const Categories = [
     } as SlotsToClasses<ChipSlots>,
   },
   {
-    key: "convenience",
+    key: "STORE",
     icon: (props: LucideProps) => <StoreIcon {...props} />,
     name: "편의점",
     className: {
@@ -355,16 +351,16 @@ const Categories = [
 
 export default function FacilityPage() {
   const [partnershipCategoryStatus, setPartnershipCategoryStatus] = useState({
-    printer: true,
-    cafe: true,
-    restaurant: true,
+    PRINTER: true,
+    CAFE: true,
+    CAFETERIA: true,
     vending: false,
     smoking: false,
-    convenience: true,
+    STORE: true,
   });
 
   const categoryInfo = {
-    printer: {
+    PRINTER: {
       name: "프린터",
       mapIcon: (
         <div>
@@ -372,7 +368,7 @@ export default function FacilityPage() {
         </div>
       ),
     },
-    restaurant: {
+    CAFETERIA: {
       name: "식당",
       mapIcon: (
         <div>
@@ -380,7 +376,7 @@ export default function FacilityPage() {
         </div>
       ),
     },
-    cafe: {
+    CAFE: {
       name: "카페",
       mapIcon: (
         <div>
@@ -404,7 +400,7 @@ export default function FacilityPage() {
         </div>
       ),
     },
-    convenience: {
+    STORE: {
       name: "편의점",
       mapIcon: (
         <div>
@@ -447,7 +443,8 @@ export default function FacilityPage() {
       </div>
 
       {facilityList.map((data, index) => (
-        <CustomOverlayMap
+
+          partnershipCategoryStatus[data.category as TCategoryKey] && (<CustomOverlayMap
           position={{ lat: Number(data.lat), lng: Number(data.lng) }}
           key={index}
         >
@@ -464,7 +461,7 @@ export default function FacilityPage() {
           <div className="absolute mt-4 -translate-x-1/2 rounded-md bg-gray-300 px-1 py-0.5 text-sm text-black">
             {data.name}
           </div>
-        </CustomOverlayMap>
+        </CustomOverlayMap>)
       ))}
     </>
   );
