@@ -1,17 +1,16 @@
 "use client";
 
 import { Suspense, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
+import { Eye, Fullscreen, Goal } from "lucide-react";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
-import { useShowList } from "./hook";
+import { useShowList } from "../hook";
 
 export default function Web() {
-  const router = useRouter();
   const Scene = () => {
     const materials = useLoader(MTLLoader, "/Poimandres.mtl");
     const obj = useLoader(OBJLoader, "/Poimandres.obj", (loader) => {
@@ -25,20 +24,20 @@ export default function Web() {
 
   const items = [
     {
-      key: "new",
-      label: "New file",
+      key: "chair",
+      label: "chair",
     },
     {
-      key: "copy",
-      label: "Copy link",
+      key: "Desk",
+      label: "Desk",
     },
     {
-      key: "edit",
-      label: "Edit file",
+      key: "Box",
+      label: "Box",
     },
     {
-      key: "delete",
-      label: "Delete file",
+      key: "Amp",
+      label: "Amp",
     },
   ];
 
@@ -54,7 +53,7 @@ export default function Web() {
         <Listbox
           items={items}
           aria-label="Room list"
-          onAction={() => router.push("/room")}
+          onAction={(key) => console.log(key)}
           className="border-small absolute left-4 top-20 z-10 h-96 w-32 flex-auto overflow-y-scroll rounded-lg bg-black"
         >
           {(item) => (
@@ -77,6 +76,11 @@ export default function Web() {
           {/* <Environment preset="sunset" background /> */}
         </Suspense>
       </Canvas>
+      <div className="mode-Overlay absolute right-8 top-20 z-10 flex flex-col items-center gap-y-4 text-black">
+        <Eye />
+        <Goal />
+        <Fullscreen />
+      </div>
     </div>
   );
 }

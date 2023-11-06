@@ -5,6 +5,7 @@ import "~/styles/globals.css";
 
 import { headers } from "next/headers";
 
+import { ShowListProvider } from "./hook";
 // import { BottomNavigation } from "./_components/BottomNavigation";
 import { TRPCReactProvider } from "./providers";
 import TopBar from "./TopBar";
@@ -19,15 +20,20 @@ export const metadata: Metadata = {
   description: "Abang-guide",
 };
 
+const _width = 1920;
+const _height = 1080;
+
 export default function Layout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className={["font-sans", fontSans.variable].join(" ")}>
         <TRPCReactProvider headers={headers()}>
-          <main className="flex min-h-screen flex-col">
-            <TopBar />
-            <div className="w-full flex-1">{props.children}</div>
-          </main>
+          <ShowListProvider>
+            <main className="flex min-h-screen flex-col">
+              <TopBar />
+              <div className="w-full flex-1">{props.children}</div>
+            </main>
+          </ShowListProvider>
           {/* <aside className="fixed bottom-0 z-10 mb-4 flex w-full justify-center">
             <BottomNavigation />
           </aside> */}
