@@ -1,124 +1,84 @@
 "use client";
 
-import { useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import {
-  Avatar,
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  cn,
-  Divider,
-  Listbox,
-  ListboxItem,
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-} from "@nextui-org/react";
-import { FacebookIcon, InstagramIcon, StickerIcon } from "lucide-react";
+import { ReactNode, Suspense, useEffect } from "react";
+import { Environment, OrbitControls } from "@react-three/drei";
+import { Canvas, useLoader } from "@react-three/fiber";
+import * as THREE from "three";
+import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
-export default function Home() {
+const _width = 1920;
+const _height = 1080;
+
+const FontSizeController: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  useEffect(() => {
+    const resizeFontSize = () => {
+      const screenWidth = Math.max(
+        document.documentElement.clientWidth,
+        window.innerWidth || 0,
+      );
+      const screenHeight = Math.max(
+        document.documentElement.clientHeight,
+        window.innerHeight || 0,
+      );
+
+      // uniform scale for our game
+      const scale = Math.min(screenWidth / _width, screenHeight / _height);
+
+      // the "uniformly enlarged" size for our game
+      const enlargedWidth = Math.floor(scale * _width);
+      const enlargedHeight = Math.floor(scale * _height);
+
+      // margins for centering our game
+      const horizontalMargin = (screenWidth - enlargedWidth) / 2;
+      // const verticalMargin = (screenHeight - enlargedHeight) / 2;
+
+      // now we use css trickery to set the sizes and margins
+      const documentStyle = document.documentElement.style;
+
+      documentStyle.fontSize = `${enlargedWidth / 80}px`;
+    };
+
+    resizeFontSize();
+    window.addEventListener("resize", resizeFontSize);
+
+    return () => {
+      window.removeEventListener("resize", resizeFontSize);
+      const documentStyle = document.documentElement.style;
+      documentStyle.fontSize = "";
+    };
+  }, []);
+
+  return <>{children}</>;
+};
+
+export default function Web() {
+  const Scene = () => {
+    const materials = useLoader(MTLLoader, "/Poimandres.mtl");
+    const obj = useLoader(OBJLoader, "/Poimandres.obj", (loader) => {
+      materials.preload();
+      loader.setMaterials(materials);
+    });
+
+    console.log(obj);
+    return <primitive object={obj} scale={1} />;
+  };
+
   return (
-    <>
-      <div className="flex w-full flex-col gap-2 px-4 py-2">
-        <Card
-          classNames={{
-            body: "p-1",
-          }}
-        >
-          <CardHeader>공지사항</CardHeader>
-          <Divider />
-          <CardBody>
-            <Listbox
-              variant="flat"
-              aria-label="Listbox menu with descriptions"
-              className="p-0"
-            >
-              <ListboxItem
-                key="new"
-                showDivider
-                description="2023-09-27 08:09:12"
-              >
-                광교 중앙역 등교 버스 도착 장소 변경 안내
-              </ListboxItem>
-              <ListboxItem
-                key="copy"
-                showDivider
-                description="2023-09-27 08:09:12"
-              >
-                광교 중앙역 등교 버스 출발 시간 변경 안내
-              </ListboxItem>
-              <ListboxItem
-                key="edit"
-                showDivider
-                description="2023-09-27 08:09:12"
-              >
-                아주대학교 셔틀버스 운행 시각 조정 안내
-              </ListboxItem>
-            </Listbox>
-          </CardBody>
-        </Card>
-        <div className="flex w-full flex-1 flex-row gap-2">
-          <Card
-            classNames={{
-              base: "flex-1 bg-gradient-to-br from-indigo-500 to-pink-500 border-small border-white/50 shadow-pink-500/30",
-              body: "flex flex-col items-center gap-2 text-white",
-            }}
-          >
-            <CardBody>
-            <Link
-                href="https://www.instagram.com/ajou.life_/"
-                className="flex flex-col items-center"
-                passHref
-                target="_blank"
-              >
-              <InstagramIcon size={32} />
-              <div className="text-sm">인스타그램</div>
-              </Link>
-            </CardBody>
-          </Card>
-          <Card
-            classNames={{
-              base: "flex-1 bg-gradient-to-br from-blue-500 to-indigo-500 border-small border-white/50 shadow-indigo-500/30",
-              body: "flex flex-col items-center gap-2 text-white",
-            }}
-          >
-            <CardBody>
-            <Link
-                href="https://www.facebook.com/ajou.life.2023?mibextid=LQQJ4d"
-                className="flex flex-col items-center"
-                passHref
-                target="_blank"
-              >
-              <FacebookIcon size={32} />
-              <div className="text-sm">페이스북</div>
-              </Link>
-            </CardBody>
-          </Card>
-          <Card
-            classNames={{
-              base: "flex-1 bg-gradient-to-br from-green-500 to-emerald-500 border-small border-white/50 shadow-emerald-500/30",
-              body: "flex flex-col items-center gap-2 text-white",
-            }}
-          >
-            <CardBody>
-              <Link
-                href="http://forms.gle/yWoQfF33XpdFTpS6A"
-                className="flex flex-col items-center"
-                passHref
-                target="_blank"
-              >
-                <StickerIcon size={32} />
-                <div className="text-sm">피드백</div>
-                <div className="text-sm">문의사항</div>
-              </Link>
-            </CardBody>
-          </Card>
-        </div>
-      </div>
-    </>
+    <div className="h-[calc(100vh-4rem)]">
+      <FontSizeController>
+        <Canvas>
+          <OrbitControls />
+          <Suspense fallback={null}>
+            <Scene />
+            <OrbitControls />
+            {/* <color attach="background" args={["#000000"]} /> */}
+            <Environment preset="sunset" background />
+          </Suspense>
+        </Canvas>
+      </FontSizeController>
+    </div>
   );
 }

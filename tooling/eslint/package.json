@@ -27,8 +27,8 @@
     "eslint-plugin-react-hooks": "^4.6.0"
   },
   "devDependencies": {
-    "@ajou-tayo/prettier-config": "^0.1.0",
-    "@ajou-tayo/tsconfig": "^0.1.0",
+    "@abang-guide/prettier-config": "^0.1.0",
+    "@abang-guide/tsconfig": "^0.1.0",
     "eslint": "^8.50.0",
     "typescript": "^5.2.2"
   },
@@ -38,5 +38,5 @@
       "./base.js"
     ]
   },
-  "prettier": "@ajou-tayo/prettier-config"
+  "prettier": "@abang-guide/prettier-config"
 }

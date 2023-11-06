@@ -24,8 +24,8 @@
   },
   "devDependencies": {
     "@acme/eslint-config": "^0.2.0",
-    "@ajou-tayo/prettier-config": "^0.1.0",
-    "@ajou-tayo/tsconfig": "^0.1.0",
+    "@abang-guide/prettier-config": "^0.1.0",
+    "@abang-guide/tsconfig": "^0.1.0",
     "eslint": "^8.50.0",
     "prettier": "^3.0.3",
     "typescript": "^5.2.2"
@@ -36,5 +36,5 @@
       "@acme/eslint-config/base"
     ]
   },
-  "prettier": "@ajou-tayo/prettier-config"
+  "prettier": "@abang-guide/prettier-config"
 }

@@ -40,8 +40,8 @@
     "@acme/api": "^0.1.0",
     "@acme/eslint-config": "^0.2.0",
     "@acme/tailwind-config": "^0.1.0",
-    "@ajou-tayo/prettier-config": "^0.1.0",
-    "@ajou-tayo/tsconfig": "^0.1.0",
+    "@abang-guide/prettier-config": "^0.1.0",
+    "@abang-guide/tsconfig": "^0.1.0",
     "@babel/core": "^7.23.0",
     "@babel/preset-env": "^7.22.20",
     "@babel/runtime": "^7.23.1",
@@ -60,5 +60,5 @@
       "@acme/eslint-config/react"
     ]
   },
-  "prettier": "@ajou-tayo/prettier-config"
+  "prettier": "@abang-guide/prettier-config"
 }

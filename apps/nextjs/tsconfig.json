@@ -1,5 +1,5 @@
 {
-  "extends": "@ajou-tayo/tsconfig/base.json",
+  "extends": "@abang-guide/tsconfig/base.json",
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {

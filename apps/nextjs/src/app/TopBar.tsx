@@ -1,27 +1,25 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import {
-  Avatar,
   Navbar,
   NavbarBrand,
   NavbarContent,
   NavbarItem,
 } from "@nextui-org/react";
+import { AlignLeft } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import ThemeSwitch from "./_components/ThemeSwitch";
 
 export default function TopBar() {
   const { theme, setTheme } = useTheme();
-  const router = useRouter();
 
   return (
     <Navbar maxWidth="full" position="sticky">
       <NavbarBrand>
-        <div className="flex flex-col justify-center">
-          <p className="text-lg font-bold leading-none">AJOU LIFE</p>
-          <p className="text-xs leading-none">장우성아직도여친구함</p>
+        <div className="flex items-center justify-center gap-x-4">
+          <span className="text-lg font-bold leading-none">Abang-Guide</span>
+          <AlignLeft style={{ cursor: "pointer" }} />
         </div>
       </NavbarBrand>
       <NavbarContent justify="end">
@@ -34,15 +32,6 @@ export default function TopBar() {
               } else {
                 setTheme("light");
               }
-            }}
-          />
-        </NavbarItem>
-        <NavbarItem>
-          <Avatar
-            showFallback
-            src="https://images.unsplash.com/broken"
-            onClick={() => {
-              router.push("/myInfo");
             }}
           />
         </NavbarItem>
