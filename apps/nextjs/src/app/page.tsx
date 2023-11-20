@@ -13,13 +13,16 @@ import { useShowList } from "./hook";
 export default function Web() {
   const router = useRouter();
   const Scene = () => {
-    const materials = useLoader(MTLLoader, "/Poimandres.mtl");
-    const obj = useLoader(OBJLoader, "/Poimandres.obj", (loader) => {
+    const materials = useLoader(MTLLoader, "/tt.mtl");
+    const obj = useLoader(OBJLoader, "/tt.obj", (loader) => {
       materials.preload();
+
       loader.setMaterials(materials);
     });
 
-    console.log(obj);
+    console.log("materials: ", materials);
+
+    console.log("object: ", obj);
     return <primitive object={obj} scale={1} />;
   };
 
@@ -45,7 +48,7 @@ export default function Web() {
   const { showList, setShowList } = useShowList();
 
   useEffect(() => {
-    console.log("page, showList: ", showList);
+    // console.log("page, showList: ", showList);
   }, [showList]);
 
   return (
