@@ -219,6 +219,9 @@ importers:
       tailwind-scrollbar-hide:
         specifier: ^1.1.7
         version: 1.1.7
+      three-freeform-controls:
+        specifier: ^0.3.0
+        version: 0.3.0(three@0.158.0)
       zod:
         specifier: ^3.22.2
         version: 3.22.2
@@ -10820,6 +10823,11 @@ packages:
       lru-cache: 7.18.3
     dev: false
 
+  /nanoevents@7.0.1:
+    resolution: {integrity: sha512-o6lpKiCxLeijK4hgsqfR6CNToPyRU3keKyyI6uwuHRvpRTbZ0wXw51WRgyldVugZqoJfkGFrjrIenYH3bfEO3Q==}
+    engines: {node: ^14.0.0 || ^16.0.0 || >=18.0.0}
+    dev: false
+
   /nanoid@3.3.6:
     resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
@@ -13268,6 +13276,16 @@ packages:
     resolution: {integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==}
     dependencies:
       any-promise: 1.3.0
+
+  /three-freeform-controls@0.3.0(three@0.158.0):
+    resolution: {integrity: sha512-Or1iSnpLb0sThHoRtuaCV5RyhTvPhKwUg+0n77OIr61lq6+63NA66VVRB/CU6XnAH5SmlcTzPzueX+l1rMZFxw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      three: '>=0.150.1'
+    dependencies:
+      nanoevents: 7.0.1
+      three: 0.158.0
+    dev: false
 
   /three-mesh-bvh@0.6.8(three@0.158.0):
     resolution: {integrity: sha512-EGebF9DZx1S8+7OZYNNTT80GXJZVf+UYXD/HyTg/e2kR/ApofIFfUS4ZzIHNnUVIadpnLSzM4n96wX+l7GMbnQ==}
