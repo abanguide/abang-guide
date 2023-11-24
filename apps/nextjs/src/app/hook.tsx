@@ -28,3 +28,21 @@ export function ShowListProvider({ children }: { children: React.ReactNode }) {
     </ShowListContext.Provider>
   );
 }
+
+export function useOrbitControls() {
+  const [enable, setEnable] = useState(false);
+
+  return {
+    enable,
+    setEnable,
+  };
+}
+
+export function useFurnitureFreeformControls() {
+  const [enable, setEnable] = useState<boolean[]>(Array());
+
+  return {
+    enable,
+    setEnable,
+  };
+}

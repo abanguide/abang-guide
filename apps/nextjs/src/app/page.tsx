@@ -18,19 +18,13 @@ import FreeformControls from "three-freeform-controls";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 
+import { FurnitureObject } from "./_components/Funiture";
+import { Funiture, FurnitureLoaderProps } from "./_components/interface";
 import NoSSRWrapper from "./_components/noSSRWrapper";
-import { useShowList } from "./hook";
+import { items } from "./_components/testData";
+import { useFurnitureFreeformControls, useShowList } from "./hook";
 
-interface Funiture {
-  key: string;
-  label: string;
-}
-
-interface FurnitureLoaderProps {
-  item: Funiture;
-}
-
-function Model({ mtlurl, objurl }: { mtlurl: string; objurl: string }) {
+function RoomModel({ mtlurl, objurl }: { mtlurl: string; objurl: string }) {
   const materials = useLoader(MTLLoader, mtlurl);
   const obj = useLoader(OBJLoader, objurl, (loader) => {
     materials.preload();
@@ -46,34 +40,6 @@ function Model({ mtlurl, objurl }: { mtlurl: string; objurl: string }) {
       object={obj}
       position={[-size.x / 2, -size.y / 2, -size.z / 2]}
     />
-  );
-}
-
-function FurnitureObject({ item }: FurnitureLoaderProps) {
-  const mtlurl = `/funiture/${item.key}.mtl`;
-  const objurl = `/funiture/${item.key}.obj`;
-
-  const materials = useLoader(MTLLoader, mtlurl);
-  const obj = useLoader(OBJLoader, objurl, (loader) => {
-    materials.preload();
-    loader.setMaterials(materials);
-  });
-
-  const { gl, camera } = useThree();
-
-  const controlsManager = useMemo(() => {
-    return new FreeformControls.ControlsManager(camera, gl.domElement);
-  }, [camera, gl]);
-
-  useEffect(() => {
-    controlsManager.anchor(obj);
-  }, [controlsManager, obj]);
-
-  return (
-    <>
-      <primitive object={obj} />
-      <primitive object={controlsManager} />
-    </>
   );
 }
 
@@ -96,43 +62,6 @@ function PlaceFuniture(obj: Object3D) {
   );
 }
 
-const Test = () => {
-  const { gl, camera } = useThree();
-
-  const controlsManager = useMemo(() => {
-    return new FreeformControls.ControlsManager(camera, gl.domElement);
-  }, [camera, gl]);
-
-  return <primitive object={controlsManager} />;
-};
-
-const items = [
-  {
-    key: "bench",
-    label: "벤치",
-  },
-  {
-    key: "bookcase_1",
-    label: "책장1",
-  },
-  {
-    key: "bookcase_2",
-    label: "책장2",
-  },
-  {
-    key: "bookcase_3",
-    label: "책장3",
-  },
-  {
-    key: "bookcase_glass_door",
-    label: "bookcase_glass_door",
-  },
-  {
-    key: "cabinet_1",
-    label: "캐비넷1",
-  },
-];
-
 export default function Web() {
   const directionalLight = new DirectionalLight(0xffffff, 1);
   directionalLight.position.set(0, 0, 100);
@@ -143,13 +72,47 @@ export default function Web() {
   const [objects, setObjects] = useState<React.ReactNode[]>([]);
 
   const { showList, setShowList } = useShowList();
+  const { enable: funiturecontrol, setEnable: setFunitureControl } =
+    useFurnitureFreeformControls();
 
   const handleListItemClick = (item: Funiture) => {
+    setFunitureControl((prev) => [...prev, true]);
     return setObjects((prev) => [
       ...prev,
-      <FurnitureObject key={Math.random()} item={item} />,
+      <FurnitureObject
+        key={Math.random()}
+        item={item}
+        index={objects.length}
+      />,
     ]);
   };
+
+  const handleControl = (index: number) => {
+    setFunitureControl((prev) => {
+      const updatedControls = [...prev];
+      updatedControls[index] = !prev[index];
+      return updatedControls;
+    });
+  };
+
+  const deleteObject = (index: number) => {
+    setObjects((prev) => {
+      const updatedObjects = [...prev];
+      updatedObjects.splice(index, 1);
+      return updatedObjects;
+    });
+    setFunitureControl((prev) => {
+      const updatedControls = [...prev];
+      updatedControls.splice(index, 1);
+      return updatedControls;
+    });
+  };
+
+  useEffect(() => {
+    objects.map((obj, index) => {
+      console.log(index, ", funiture : ", obj?.props?.item.label);
+    });
+  }, [objects]);
 
   return (
     <div className="h-[calc(100vh-4rem)]">
@@ -172,14 +135,34 @@ export default function Web() {
         </Listbox>
       )}
       <Canvas style={{ background: "white" }}>
-        <OrbitControls />
+        {!funiturecontrol.includes(true) && <OrbitControls />}
         <NoSSRWrapper>
           <directionalLight />
           <ambientLight />
-          <Model mtlurl="/room/2.mtl" objurl="/room/2.obj" />
+          <RoomModel mtlurl="/room/2.mtl" objurl="/room/2.obj" />
           {objects}
         </NoSSRWrapper>
       </Canvas>
+      <div className="funiture-List absolute bottom-1 right-4 h-52 w-48 rounded-lg bg-black">
+        <div className="List-Head rounded-t-lg border-b border-b-white bg-slate-700 text-center">
+          배치된 가구들
+        </div>
+        {objects.map((funiture, index) => (
+          <div className="funiture-item flex justify-between px-2" key={index}>
+            <div className="index">{index}</div>
+            <div className="label">{funiture?.props?.item.label}</div>
+            <div
+              className="control-button"
+              onClick={() => handleControl(index)}
+            >
+              {funiturecontrol[index] ? "ON" : "OFF"}
+            </div>
+            <div className="delete-button" onClick={() => deleteObject(index)}>
+              X
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
