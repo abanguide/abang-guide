@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Listbox, ListboxItem } from "@nextui-org/react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader, useThree } from "@react-three/fiber";
+import { EyeOff, View } from "lucide-react";
 import {
   Box3,
   DirectionalLight,
@@ -74,7 +75,7 @@ export default function Web() {
   const { showList, setShowList } = useShowList();
   const { enable: funiturecontrol, setEnable: setFunitureControl } =
     useFurnitureFreeformControls();
-
+  const [orbitControl, setOrbitControl] = useState(true);
   const handleListItemClick = (item: Funiture) => {
     setFunitureControl((prev) => [...prev, true]);
     return setObjects((prev) => [
@@ -135,7 +136,7 @@ export default function Web() {
         </Listbox>
       )}
       <Canvas style={{ background: "white" }}>
-        {!funiturecontrol.includes(true) && <OrbitControls />}
+        {orbitControl && !funiturecontrol.includes(true) && <OrbitControls />}
         <NoSSRWrapper>
           <directionalLight />
           <ambientLight />
@@ -143,6 +144,12 @@ export default function Web() {
           {objects}
         </NoSSRWrapper>
       </Canvas>
+      <div
+        className="orbit-control absolute right-4 top-20 text-black"
+        onClick={() => setOrbitControl(!orbitControl)}
+      >
+        {orbitControl ? <View size={36} /> : <EyeOff size={36} />}
+      </div>
       <div className="funiture-List absolute bottom-1 right-4 h-52 w-48 rounded-lg bg-black">
         <div className="List-Head rounded-t-lg border-b border-b-white bg-slate-700 text-center">
           배치된 가구들
