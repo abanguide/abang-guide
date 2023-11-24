@@ -23,7 +23,11 @@ import { FurnitureObject } from "./_components/Funiture";
 import { Funiture, FurnitureLoaderProps } from "./_components/interface";
 import NoSSRWrapper from "./_components/noSSRWrapper";
 import { items } from "./_components/testData";
-import { useFurnitureFreeformControls, useShowList } from "./hook";
+import {
+  FurnitureFreeFormProvider,
+  useFurnitureFreeformControls,
+  useShowList,
+} from "./hook";
 
 function RoomModel({ mtlurl, objurl }: { mtlurl: string; objurl: string }) {
   const materials = useLoader(MTLLoader, mtlurl);
@@ -77,7 +81,7 @@ export default function Web() {
     useFurnitureFreeformControls();
   const [orbitControl, setOrbitControl] = useState(true);
   const handleListItemClick = (item: Funiture) => {
-    setFunitureControl((prev) => [...prev, true]);
+    setFunitureControl((prev: boolean[]) => [...prev, true]);
     return setObjects((prev) => [
       ...prev,
       <FurnitureObject
@@ -111,9 +115,13 @@ export default function Web() {
 
   useEffect(() => {
     objects.map((obj, index) => {
-      console.log(index, ", funiture : ", obj?.props?.item.label);
+      console.log(index, ", funiture : ", obj);
     });
   }, [objects]);
+
+  useEffect(() => {
+    console.log("funiturecontrol : ", funiturecontrol);
+  }, [funiturecontrol]);
 
   return (
     <div className="h-[calc(100vh-4rem)]">

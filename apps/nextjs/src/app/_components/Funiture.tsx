@@ -29,6 +29,10 @@ export function FurnitureObject({ item, index }: FurnitureLoaderProps) {
     controlsManager.anchor(obj);
   }, [controlsManager, obj]);
 
+  useEffect(() => {
+    console.log("control enable", enable);
+  });
+
   return (
     <>
       <primitive object={obj} />

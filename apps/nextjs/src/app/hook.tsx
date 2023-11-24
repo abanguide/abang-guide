@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useMemo, useState } from "react";
 
 interface ShowListContextType {
   showList: boolean;
@@ -38,11 +38,37 @@ export function useOrbitControls() {
   };
 }
 
+interface FreeFormControlContextType {
+  enable: boolean[];
+  setEnable: (value: boolean[]) => void;
+}
+
+const FreeFormContext = createContext<FreeFormControlContextType | undefined>(
+  undefined,
+);
+
 export function useFurnitureFreeformControls() {
+  const context = useContext(FreeFormContext);
+
+  if (context === undefined) {
+    throw new Error(
+      "useFurnitureFreeformControls must be used within a FurnitureFreeFormProvider",
+    );
+  }
+
+  return context;
+}
+
+export function FurnitureFreeFormProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [enable, setEnable] = useState<boolean[]>(Array());
 
-  return {
-    enable,
-    setEnable,
-  };
+  return (
+    <FreeFormContext.Provider value={{ enable, setEnable }}>
+      {children}
+    </FreeFormContext.Provider>
+  );
 }

@@ -5,7 +5,7 @@ import "~/styles/globals.css";
 
 import { headers } from "next/headers";
 
-import { ShowListProvider } from "./hook";
+import { FurnitureFreeFormProvider, ShowListProvider } from "./hook";
 // import { BottomNavigation } from "./_components/BottomNavigation";
 import { TRPCReactProvider } from "./providers";
 import TopBar from "./TopBar";
@@ -31,7 +31,9 @@ export default function Layout(props: { children: React.ReactNode }) {
           <ShowListProvider>
             <main className="flex min-h-screen flex-col">
               <TopBar />
-              <div className="w-full flex-1">{props.children}</div>
+              <FurnitureFreeFormProvider>
+                <div className="w-full flex-1">{props.children}</div>
+              </FurnitureFreeFormProvider>
             </main>
           </ShowListProvider>
           {/* <aside className="fixed bottom-0 z-10 mb-4 flex w-full justify-center">
